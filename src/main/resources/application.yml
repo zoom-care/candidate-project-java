@@ -6,11 +6,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: beans, conditions, configprops, env, flyway, httptrace, metrics, mappings, health, info
+        include: "*"
+  endpoint:
     health:
       show-details: always
-  health:
-    defaults:
-      enabled: true
-    db:
-      enabled: true
