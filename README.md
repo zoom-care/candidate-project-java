@@ -2,12 +2,12 @@
 
 ![ZOOM+Care Logo](https://avatars0.githubusercontent.com/u/48925141?s=150)
 
-Welcome to the ZOOM+Care Java Web Service Candidate Code Challenge. If you are here you most likely have interest in joining the ZOOM+Care Software Engineering Team and asked to choose one of our software development challeges. If you came here on your own, you are welcome to explore the challenge and use it to sharpen your skills or prepare for future interviews.
+Welcome to the ZOOM+Care Java Web Service Candidate Code Challenge. If you are here you most likely have interest in joining the ZOOM+Care Software Engineering Team and asked to choose one of our software development challenges. If you came here on your own, you are welcome to explore the challenge and use it to sharpen your skills or prepare for future interviews.
 
-The ZOOM+Care Candidate Code Challenges are intented to take between 1 and 2 hours to complete. This is not intended to be an extensive test of your programing skills or knowledge, but rather as a starting point for further conversations during the application process. 
+The ZOOM+Care Candidate Code Challenges are intended to take between 1 and 2 hours to complete. This is not intended to be an extensive test of your programing skills or knowledge, but rather as a starting point for further conversations during the application process.
 
 ## Instructions
-This Candidate Code Challenge is geared specifically toward developers with java and web service experience. The objective of this challenge is to start with this very basic project, which includes a database with employee data, to expose the supplied data in web service endpoints. 
+This Candidate Code Challenge is geared specifically toward developers with java and web service experience. The objective of this challenge is to start with this very basic project, which includes a database with employee data, to expose the supplied data in web service endpoints.
 
 The database is a relational database containing two tables, `EMPLOYEE` and `PROPERTIES`.  The `EMPLOYEE` table is a simple mapping of an employee's id to their supervisor's id (or null if they have no supervisor). The `PROPERTIES` table contains a map of key/value pairs of properties for the employee.
 
@@ -27,7 +27,7 @@ The embedded database is configured using the spring-boot defaults for JDBC and 
 For additional details and troubleshooting, the project includes spring actuator in the default path [http://localhost:8080/actuator](http://localhost:8080/actuator) with all endpoints exposed and unsecure, including the detailed health endpoint at [http://localhost:8080/actuator/health](http://localhost:8080/actuator/health)
 
 ## Table Reference
-**EMPLOYEE**  
+**EMPLOYEE**
 An primary id for an employee and a reference to the employees supervisor.
 
 | Column        | Type          |
@@ -35,7 +35,7 @@ An primary id for an employee and a reference to the employees supervisor.
 | ID            | BIGINT(19)    |
 | SUPERVISOR_ID | BIGINT(19)    |
 
-**PROPERTIES**  
+**PROPERTIES**
 A map of key/value pairs of properties assigned to an employee.
 
 | Column        | Type          |
