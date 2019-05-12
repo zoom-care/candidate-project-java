@@ -10,8 +10,13 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.zoomcare.candidatechallenge.service.EmployeeNotFoundException;
 
-@ControllerAdvice
 
+/**
+ * Handle employee not found based on Id by sending back a 404
+ * @author lalit
+ *
+ */
+@ControllerAdvice
 public class RestExceptionHandler
 
 		extends ResponseEntityExceptionHandler {

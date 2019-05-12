@@ -9,6 +9,11 @@ import org.springframework.stereotype.Component;
 import com.zoomcare.candidatechallenge.models.Employee;
 import com.zoomcare.candidatechallenge.repositories.EmployeeRepository;
 
+/**
+ * Not absolutely needed for this challenge since all access is read only
+ * @author lalit
+ *
+ */
 @Component
 public class EmployeeService {
 

@@ -72,6 +72,23 @@ public class Employee {
 		this.properties = properties;
 	}
 
+	public void addTestProperty(String key, String value) {
+
+		if (getProperties() == null) {
+			setProperties(new HashSet<Property>());
+		}
+
+		PropertyIdentifier keyProp = new PropertyIdentifier();
+		keyProp.setEmployeeId(getId());
+		keyProp.setKey(key);
+		Property testProp = new Property();
+		testProp.setId(keyProp);
+		testProp.setValue(value);
+
+		getProperties().add(testProp);
+
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
