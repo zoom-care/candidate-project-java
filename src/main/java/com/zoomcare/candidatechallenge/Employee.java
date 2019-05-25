@@ -6,13 +6,13 @@ import java.util.ArrayList;
  * Created by gwjense on 5/23/19.
  */
 public class Employee {
-    private int employeeId;
-    private int supervisorId;
+    private Long employeeId;
+    private Long supervisorId;
     private String title;
     private String propertyValue;
     private ArrayList<Employee> employees;
 
-    public Employee(int employeeId, int supervisorId) {
+    public Employee(Long employeeId, Long supervisorId) {
         this.employeeId = employeeId;
         this.supervisorId = supervisorId;
         this.title = "";
@@ -21,7 +21,7 @@ public class Employee {
 
     }
 
-    public Employee(int employeeId, int supervisorId, String title, String propertyValue) {
+    public Employee(Long employeeId, Long supervisorId, String title, String propertyValue) {
         this.employeeId = employeeId;
         this.supervisorId = supervisorId;
         this.title = title;
@@ -29,19 +29,19 @@ public class Employee {
         this.employees = new ArrayList<>();
     }
 
-    public int getEmployeeId() {
+    public Long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
 
-    public int getSupervisorId() {
+    public Long getSupervisorId() {
         return supervisorId;
     }
 
-    public void setSupervisorId(int supervisorId) {
+    public void setSupervisorId(Long supervisorId) {
         this.supervisorId = supervisorId;
     }
 

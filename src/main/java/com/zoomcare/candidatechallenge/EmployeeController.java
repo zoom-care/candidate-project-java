@@ -17,9 +17,9 @@ import java.util.HashMap;
 @Controller
 public class EmployeeController {
 
-    HashMap<Integer, Employee> employeesById = new HashMap<>();
+    HashMap<Long, Employee> employeesById = new HashMap<>();
 
-    HashMap<Integer, ArrayList<Employee>> employeesBySupervisor = new HashMap<>();
+    HashMap<Long, ArrayList<Employee>> employeesBySupervisor = new HashMap<>();
 
     String string;
 
@@ -28,14 +28,14 @@ public class EmployeeController {
     @ResponseBody
     public String processForm(@RequestParam(defaultValue="1") String employeeId) {
 
-        return grabEmployeeData(Integer.parseInt(employeeId));
+        return grabEmployeeData(Long.parseLong(employeeId));
     }
 
     @RequestMapping("/toplevelemployees")
     @ResponseBody
     public String topLevelEmployees()
     {
-        return grabEmployeeData(1);
+        return grabEmployeeData(1L);
     }
 
 
@@ -44,7 +44,7 @@ public class EmployeeController {
      * @param employeeId the employeeId to set as the top level of the returned Hierarchy
      * @return a Json representation of the specified employee Hierarchy.
      */
-    public String grabEmployeeData(int employeeId)
+    public String grabEmployeeData(Long employeeId)
     {
         employeesBySupervisor.clear();
         employeesById.clear();
@@ -79,8 +79,8 @@ public class EmployeeController {
 
             while (employeeResultSet.next()) {
                 currentEmployee = new Employee(
-                        employeeResultSet.getInt(1),    // Employee Id
-                        employeeResultSet.getInt(2),     // Supervisor Id
+                        employeeResultSet.getLong(1),    // Employee Id
+                        employeeResultSet.getLong(2),     // Supervisor Id
                         employeeHashMap.get(employeeResultSet.getInt(1)+"title"),
                         employeeHashMap.get(employeeResultSet.getInt(1)+"region"));
                 employeesById.put(currentEmployee.getEmployeeId(), currentEmployee);
