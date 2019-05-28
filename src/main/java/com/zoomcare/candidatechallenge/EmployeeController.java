@@ -21,8 +21,6 @@ public class EmployeeController {
 
     HashMap<Long, ArrayList<Employee>> employeesBySupervisor = new HashMap<>();
 
-    String string;
-
 
     @RequestMapping(path="/employees", produces=MediaType.TEXT_PLAIN_VALUE)
     @ResponseBody
@@ -51,39 +49,25 @@ public class EmployeeController {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:mem:testdb", "sa","")){
+        try (Connection connection = DriverManager.getConnection("jdbc:h2:mem:testdb", "sa","")){
 
-            HashMap<String, String> employeeHashMap = new HashMap<>();
+            String query = "SELECT * FROM EMPLOYEE ORDER BY ID";
 
-            String query = "SELECT * FROM PROPERTY ORDER BY EMPLOYEE_ID";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
-
-            ResultSet propertyResultSet = preparedStatement.executeQuery();
-
-            while (propertyResultSet.next())
-            {
-                employeeHashMap.put(propertyResultSet.getInt(1)+propertyResultSet.getString(2),propertyResultSet.getString(3));
-            }
-
-            query = "SELECT * FROM EMPLOYEE ORDER BY ID";
-
-            preparedStatement = conn.prepareStatement(query);
-
-            ResultSet employeeResultSet = preparedStatement.executeQuery();
-
-
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             stringBuilder.delete(0,stringBuilder.length());
+
             Employee currentEmployee;
 
-            while (employeeResultSet.next()) {
+            while (resultSet.next()) {
                 currentEmployee = new Employee(
-                        employeeResultSet.getLong(1),    // Employee Id
-                        employeeResultSet.getLong(2),     // Supervisor Id
-                        employeeHashMap.get(employeeResultSet.getInt(1)+"title"),
-                        employeeHashMap.get(employeeResultSet.getInt(1)+"region"));
+                        resultSet.getLong(1),    // Employee Id
+                        resultSet.getLong(2));     // Supervisor Id
+
                 employeesById.put(currentEmployee.getEmployeeId(), currentEmployee);
+
                 if(employeesBySupervisor.containsKey(currentEmployee.getSupervisorId())) {
                     employeesBySupervisor.get(currentEmployee.getSupervisorId()).add(currentEmployee);
                 } else {
@@ -93,19 +77,31 @@ public class EmployeeController {
                 }
             }
 
-            Employee employee = employeesById.get(employeeId);
-            addDirectReports(employee, employeesBySupervisor.get(employee.getEmployeeId()));
 
+            query = "SELECT * FROM PROPERTY ORDER BY EMPLOYEE_ID";
 
-            string = nestedEmployees(employee);
+            preparedStatement = connection.prepareStatement(query);
+
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next())
+            {
+                Employee employee = employeesById.get(resultSet.getLong(1)); // Grab employee associated with property entry.
+                employee.getProperties().put(resultSet.getString(2), // Key - IE: title, region, etc.
+                                            resultSet.getString(3)); // Value
+            }
 
         } catch (SQLException e)
         {
             System.out.print(e.getMessage());
         }
 
+        Employee employee = employeesById.get(employeeId);
+        if (employee != null) {
+            addDirectReports(employee, employeesBySupervisor.get(employee.getEmployeeId()));
+        }
 
-        return string;
+        return employeesToJson(employee);
     }
 
     /**
@@ -113,12 +109,11 @@ public class EmployeeController {
      * @param employee employee to be returned with directReports 
      * @return Json representation of hierarchy
      */
-    public String nestedEmployees(Employee employee)
+    public String employeesToJson(Employee employee)
     {
         Gson gson = new Gson();
         return gson.toJson(employee);
     }
-
 
     /**
      * Adds directReports to the specified employee, and calls recursively to generate nested hierarchy

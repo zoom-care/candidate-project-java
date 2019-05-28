@@ -1,6 +1,7 @@
 package com.zoomcare.candidatechallenge;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by gwjense on 5/23/19.
@@ -8,24 +9,13 @@ import java.util.ArrayList;
 public class Employee {
     private Long employeeId;
     private Long supervisorId;
-    private String title;
-    private String propertyValue;
+    private HashMap<String, String> properties;
     private ArrayList<Employee> employees;
 
     public Employee(Long employeeId, Long supervisorId) {
         this.employeeId = employeeId;
         this.supervisorId = supervisorId;
-        this.title = "";
-        this.propertyValue = "";
-        this.employees = new ArrayList<>();
-
-    }
-
-    public Employee(Long employeeId, Long supervisorId, String title, String propertyValue) {
-        this.employeeId = employeeId;
-        this.supervisorId = supervisorId;
-        this.title = title;
-        this.propertyValue = propertyValue;
+        this.properties = new HashMap<>();
         this.employees = new ArrayList<>();
     }
 
@@ -45,20 +35,12 @@ public class Employee {
         this.supervisorId = supervisorId;
     }
 
-    public String getTitle() {
-        return title;
+    public HashMap<String, String> getProperties() {
+        return properties;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getPropertyValue() {
-        return propertyValue;
-    }
-
-    public void setPropertyValue(String propertyValue) {
-        this.propertyValue = propertyValue;
+    public void setProperties(HashMap<String, String> properties) {
+        this.properties = properties;
     }
 
     public ArrayList<Employee> getEmployees() {
