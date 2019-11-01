@@ -40,6 +40,7 @@ public class EmployeeService implements IEmployeeService
         for (Employee employee: employeeList)
         {
             final UiEmployee uiEmployee = convertEmployee(employee);
+
             uiEmployees.add(uiEmployee);
         }
 
@@ -75,20 +76,21 @@ public class EmployeeService implements IEmployeeService
 
         final List<UiEmployeeDetails> uiEmployeeDetailsList = new ArrayList<>();
 
-        for (EmployeeProperty employeeProperties : employee.getEmployeeProperties())
+        if (employee.getEmployeeProperties() != null)
         {
-            UiEmployeeDetails uiEmployeeDetails = new UiEmployeeDetails();
+            for (EmployeeProperty employeeProperties : employee.getEmployeeProperties())
+            {
+                final UiEmployeeDetails uiEmployeeDetails = new UiEmployeeDetails();
 
-            System.out.println("key = " + employeeProperties.getKey() + ", value = " + employeeProperties.getValue());
-            uiEmployeeDetails.setKey(employeeProperties.getKey());
-            uiEmployeeDetails.setValue(employeeProperties.getValue());
+                uiEmployeeDetails.setKey(employeeProperties.getKey());
+                uiEmployeeDetails.setValue(employeeProperties.getValue());
 
-            uiEmployeeDetailsList.add(uiEmployeeDetails);
+                uiEmployeeDetailsList.add(uiEmployeeDetails);
+            }
+
+            uiEmployee.setEmployeeDetails(uiEmployeeDetailsList);
         }
 
-        uiEmployee.setEmployeeDetails(uiEmployeeDetailsList);
         return uiEmployee;
     }
-
-
 }

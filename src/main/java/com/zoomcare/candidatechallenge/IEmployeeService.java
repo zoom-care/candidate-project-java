@@ -18,7 +18,7 @@ public interface IEmployeeService
     /**
      * Obtains all available employees' information.
      */
-    @RequestMapping(value = "/details", method = RequestMethod.GET)
+    @RequestMapping(value = "/employees", method = RequestMethod.GET)
     ResponseEntity<List<UiEmployee>> getAllEmployeeInformation();
 
     /**
@@ -26,6 +26,6 @@ public interface IEmployeeService
      *
      * @param employeeId The ID of the employee.
      */
-    @RequestMapping(value = "/details/{employeeId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/employees/{employeeId}", method = RequestMethod.GET)
     ResponseEntity<UiEmployee> getEmployeeInformation(Long employeeId);
 }

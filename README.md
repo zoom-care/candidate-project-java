@@ -9,7 +9,7 @@ The ZOOM+Care Candidate Code Challenges are intended to take between 1 and 2 hou
 ## Instructions
 This Candidate Code Challenge is geared specifically toward developers with java and web service experience. The objective of this challenge is to start with this very basic project, which includes a database with employee data, to expose the supplied data in web service endpoints.
 
-The database is a relational database containing two tables, `EMPLOYEE` and `PROPERTIES`.  The `EMPLOYEE` table is a simple mapping of an employee's id to their supervisor's id (or null if they have no supervisor). The `PROPERTIES` table contains a map of key/value pairs of properties for the employee.
+The database is a relational database containing two tables, `EMPLOYEE` and `PROPERTY`.  The `EMPLOYEE` table is a simple mapping of an employee's id to their supervisor's id (or null if they have no supervisor). The `PROPERTY` table contains a map of key/value pairs of properties for the employee.
 
 The resulting services should allow users to get a list of all top-level employees or to specify an employee by id to return just that employee.  The result for each employee, whether in the top level list or an individual, should include the employee's Id and all properties as well as a nested list of all direct reports for that employee.  This applies any where in the structure an employee is displayed, creating a deeply nested structure of the organization.
 
@@ -35,7 +35,7 @@ An primary id for an employee and a reference to the employees supervisor.
 | ID            | BIGINT(19)    |
 | SUPERVISOR_ID | BIGINT(19)    |
 
-**PROPERTIES**
+**PROPERTY**
 A map of key/value pairs of properties assigned to an employee.
 
 | Column        | Type          |
