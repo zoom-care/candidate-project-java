@@ -8,23 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
-/*
-
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-*/
-	/*
-	ObjectMapper mapper = new ObjectMapper();
-	String propjson = "emp json error";
-	try {
-	    propjson = mapper.writeValueAsString(propertys);
-	} catch (JsonProcessingException e) {
-	    e.printStackTrace();
-	}
-*/
+//8:42
 
 @RestController
 public class ZoomController {
@@ -59,9 +43,11 @@ public class ZoomController {
     private List<Employee> sortEmployees(List<Employee> employees, List<Employee> newEmployees) {
 	int newSize = newEmployees.size();
 	for ( int i=0 ; i< employees.size(); ++i ) {
+	    Employee emp = employees.get(i);	
 	    for (int j=0; j< newSize; j++ ) {
-		if (Integer.parseInt(employees.get(i).getSupervisorId()) == newEmployees.get(j).getId()) {
-		    newEmployees.add(j+1,employees.get(i));
+		Employee newEmp = employees.get(j);	    
+		if (Integer.parseInt(emp.getSupervisorId()) == newEmp.getId()) {    
+		    newEmployees.add(j+1,emp);
 		} 
 	    }
 	    newSize = newEmployees.size();
@@ -84,10 +70,10 @@ public class ZoomController {
     private String getEmployeeHtml(List<Employee> finalEmployees, List<Property> propertys ) {
 	String empHTML = "<ul>";
 	for (Employee newEmp : finalEmployees) {
-	    empHTML += "<li  >EmployeeID: " + newEmp.getId() + " - Supervisor: " + newEmp.getSupervisorId();
+	    empHTML += "<li>EmployeeID: " + newEmp.getId() + " - Supervisor: " + newEmp.getSupervisorId();
 	    empHTML += this.getPropertyHTML(propertys, newEmp.getId());
 	    empHTML += "</li>";
-	}
+	} 
 	empHTML += "</ul>";
 	return empHTML;
     }

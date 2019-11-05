@@ -2,12 +2,7 @@
 package com.zoomcare.candidatechallenge;
 
 import java.io.Serializable;
-/*
 
-import javax.persistence.Embeddable;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-*/
 public class PropertyIdentity implements Serializable {
 
     private int employee_id;
