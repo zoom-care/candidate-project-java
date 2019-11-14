@@ -49,3 +49,22 @@ A map of key/value pairs of properties assigned to an employee.
 1. Create a Fork of the repository into your personal GitHub space.
 2. Implement the feature as described above.
 3. Create a Pull Request back to the original project.
+
+## Implementation Notes 
+#### Implementation by Aaron Sander
+
+Rest API implemented in `EmployeeResource`<br>
+Api Endpoints:
+
+- //localhost:8080/api/employee
+    - returns nested list of all employees
+    
+    
+    http://localhost:8080/api/employee/id/{id}
+    - returns nested list of employee specified by id and all reports of that employee 
+
+
+Business logic and database access implemented in `EmployeeService`. The
+test cases are not intended to be comprehensive, but rather a sample of 
+the cases I would want to test for this API.
+
