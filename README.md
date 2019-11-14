@@ -56,9 +56,8 @@ A map of key/value pairs of properties assigned to an employee.
 Rest API implemented in `EmployeeResource`<br>
 Api Endpoints:
 
-- //localhost:8080/api/employee
+    http://localhost:8080/api/employee
     - returns nested list of all employees
-    
     
     http://localhost:8080/api/employee/id/{id}
     - returns nested list of employee specified by id and all reports of that employee 
@@ -67,4 +66,6 @@ Api Endpoints:
 Business logic and database access implemented in `EmployeeService`. The
 test cases are not intended to be comprehensive, but rather a sample of 
 the cases I would want to test for this API.
+
+For this assignment I just used a map to represent an Employee. Creating a DTO would probably improve readability and would be a good refactor.
 
