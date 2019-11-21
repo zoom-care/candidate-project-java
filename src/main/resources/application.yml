@@ -2,6 +2,18 @@ spring:
   h2:
     console:
       enabled: true
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.H2Dialect
 management:
   endpoints:
     web:
@@ -10,3 +22,7 @@ management:
   endpoint:
     health:
       show-details: always
+
+database:
+  url: jdbc:h2:mem:testdb
+  username: sa
