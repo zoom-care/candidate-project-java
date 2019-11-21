@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-@Entity
+@Entity(name="Employee")
 @Table(name="EMPLOYEE")
 public class Employee {
 
@@ -16,6 +16,7 @@ public class Employee {
     private Long id;
     @Column(name="SUPERVISOR_ID")
     private Long supervisorId;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="employeeId", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "EMPLOYEE_ID")
     private List<Properties> properties;
 }

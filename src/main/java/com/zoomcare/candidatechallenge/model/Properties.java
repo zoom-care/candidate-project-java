@@ -5,8 +5,8 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Data
-@Entity
-@Table(name="PROPERTIES")
+@Entity(name="Properties")
+@Table(name="PROPERTY")
 public class Properties {
 
     @Id
