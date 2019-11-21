@@ -1,7 +1,9 @@
 package com.zoomcare.candidatechallenge.controller;
 
+import com.zoomcare.candidatechallenge.exceptions.EmployeeInternalServerError;
+import com.zoomcare.candidatechallenge.exceptions.EmployeeNotFound;
 import com.zoomcare.candidatechallenge.model.Employee;
-import com.zoomcare.candidatechallenge.repository.EmployeeRepository;
+import com.zoomcare.candidatechallenge.repository.EmployeeRepositoryImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,24 +16,37 @@ import java.util.List;
 @RestController
 public class EmployeeController {
 
-//    @Autowired
-//    private EmployeeRepository employeeRepository;
+    @Autowired
+    private EmployeeRepositoryImpl employeeRepository;
 
     @GetMapping("/employees/{employee_id}")
-    String employees(@PathVariable("employee_id") Long employeeId) {
+    Employee employees(@PathVariable("employee_id") Long employeeId) throws EmployeeNotFound, EmployeeInternalServerError {
         log.info("Retrieving employee by id {}", employeeId);
 
-       // Employee employee = employeeRepository.getEmployeesByID(employeeId);
+        try {
+            Employee employee = employeeRepository.getEmployeesByID(employeeId);
 
-        return "done";
+            if (employee == null) {
+                throw new EmployeeNotFound( String.format("No entry was found for employee %s", employeeId));
+            }
+            return employee;
+        } catch (Exception ex) {
+            throw new EmployeeInternalServerError(String.format("Unexpected error occurred during request. %s", ex.getLocalizedMessage()));
+        }
     }
 
     @GetMapping("/employees")
-    String employees() {
+    List<Employee> employees() throws EmployeeInternalServerError {
+        log.info("Retrieving all employees");
 
-        //List<Employee> employees = employeeRepository.findAll();
+        try {
+            List<Employee> employees = employeeRepository.findAll();
 
-        return "done";
+            log.info("Found {} employees", employees.size());
+            return employees;
+        } catch (Exception ex) {
+            throw new EmployeeInternalServerError(String.format("Unexpected error occurred during request. %s", ex.getLocalizedMessage()));
+        }
     }
 
 
