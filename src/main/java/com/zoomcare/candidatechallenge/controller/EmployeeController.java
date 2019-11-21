@@ -48,6 +48,4 @@ public class EmployeeController {
             throw new EmployeeInternalServerError(String.format("Unexpected error occurred during request. %s", ex.getLocalizedMessage()));
         }
     }
-
-
 }
