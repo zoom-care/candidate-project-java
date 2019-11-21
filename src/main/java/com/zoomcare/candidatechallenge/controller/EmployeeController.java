@@ -3,7 +3,7 @@ package com.zoomcare.candidatechallenge.controller;
 import com.zoomcare.candidatechallenge.exceptions.EmployeeInternalServerError;
 import com.zoomcare.candidatechallenge.exceptions.EmployeeNotFound;
 import com.zoomcare.candidatechallenge.model.Employee;
-import com.zoomcare.candidatechallenge.repository.EmployeeRepositoryImpl;
+import com.zoomcare.candidatechallenge.repository.EmployeeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,14 +17,14 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeRepositoryImpl employeeRepository;
+    private EmployeeRepository employeeRepository;
 
     @GetMapping("/employees/{employee_id}")
     Employee employees(@PathVariable("employee_id") Long employeeId) throws EmployeeNotFound, EmployeeInternalServerError {
         log.info("Retrieving employee by id {}", employeeId);
 
         try {
-            Employee employee = employeeRepository.getEmployeesByID(employeeId);
+            Employee employee = employeeRepository.findEmployeeById(employeeId);
 
             if (employee == null) {
                 throw new EmployeeNotFound( String.format("No entry was found for employee %s", employeeId));

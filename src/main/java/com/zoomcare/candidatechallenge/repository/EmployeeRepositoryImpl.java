@@ -18,7 +18,7 @@ public class EmployeeRepositoryImpl {
     }
 
     public Employee getEmployeesByID(Long employeeId) {
-        Query q = entityManager.createNativeQuery("SELECT * FROM EMPLOYEE WHERE ID = :employeeId", Employee.class);
+        Query q = entityManager.createNativeQuery("SELECT * FROM EMPLOYEE as a INNER JOIN PROPERTIES as b ON a.ID = b.EMPLOYEE_ID WHERE ID = :employeeId", Employee.class);
         q.setParameter("employeeId", employeeId);
         List<Employee> employees = q.getResultList();
         return employees.size() == 1 ? employees.get(0) : null;
