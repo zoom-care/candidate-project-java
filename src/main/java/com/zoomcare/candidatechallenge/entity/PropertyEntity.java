@@ -1,6 +1,7 @@
 package com.zoomcare.candidatechallenge.entity;
 
 import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
