@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
-@Entity(name="Property")
+@Entity
 @Table(name="PROPERTY")
 public class PropertyEntity implements Serializable {
 

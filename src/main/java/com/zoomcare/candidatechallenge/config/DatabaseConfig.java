@@ -15,13 +15,11 @@ public class DatabaseConfig {
 
     @Bean
     public DataSource getDataSource(@Value("${database.url}") String url, @Value("${database.username}") String username) {
-
         log.info("Setting up db connection with url {}", url);
         log.debug("db connection username {}", username);
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.url(url);
         dataSourceBuilder.username(username);
         return dataSourceBuilder.build();
-
     }
 }

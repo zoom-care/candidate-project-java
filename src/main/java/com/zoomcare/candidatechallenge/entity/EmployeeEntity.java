@@ -4,10 +4,10 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 @Data
-@Entity(name="Employee")
+@Entity
 @Table(name="EMPLOYEE")
 public class EmployeeEntity implements Serializable {
 
@@ -20,11 +20,9 @@ public class EmployeeEntity implements Serializable {
     @Column(name="SUPERVISOR_ID")
     private Long supervisorId;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "EMPLOYEE_ID")
-    private List<PropertyEntity> employeeProperties = null;
+    @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "ID")
+    private Set<PropertyEntity> employeeProperties = null;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "SUPERVISOR_ID")
-    private List<PropertyEntity> supervisorProperties;
-
-
+    private Set<PropertyEntity> supervisorProperties;
 }

@@ -20,13 +20,13 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping("/employees/{employee_id}")
-    Employee employees(@PathVariable("employee_id") Long employeeId) throws EmployeeNotFound, EmployeeInternalServerError {
+    public Employee getEmployeeById(@PathVariable("employee_id") Long employeeId) throws EmployeeNotFound, EmployeeInternalServerError {
         log.info("Retrieving employee by id {}", employeeId);
         return employeeService.getEmployeeById(employeeId);
     }
 
     @GetMapping("/employees")
-    List<Employee> employees() throws EmployeeInternalServerError {
+    public List<Employee> getEmployees() throws EmployeeInternalServerError {
         log.info("Retrieving all employees");
         return employeeService.getAllEmployees();
     }
