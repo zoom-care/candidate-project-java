@@ -1,13 +1,13 @@
-package com.zoomcare.candidatechallenge.model;
+package com.zoomcare.candidatechallenge.entity;
 
 import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
-@Entity(name="Properties")
+@Entity(name="Property")
 @Table(name="PROPERTY")
-public class Properties implements Serializable {
+public class PropertyEntity implements Serializable {
 
     public static final long serialVersionUID = 4102227965536374244L;
 

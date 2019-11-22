@@ -1,15 +1,13 @@
 package com.zoomcare.candidatechallenge.service;
 
-import com.zoomcare.candidatechallenge.repository.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.zoomcare.candidatechallenge.dto.Employee;
+import com.zoomcare.candidatechallenge.exceptions.EmployeeInternalServerError;
+import com.zoomcare.candidatechallenge.exceptions.EmployeeNotFound;
 
-@Service
-public class EmployeeService {
+import java.util.List;
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
+public interface EmployeeService {
 
-
-
+    List<Employee> getAllEmployees() throws EmployeeInternalServerError;
+    Employee getEmployeeById(Long employeeId)  throws EmployeeNotFound, EmployeeInternalServerError;
 }

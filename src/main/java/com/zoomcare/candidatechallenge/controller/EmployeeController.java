@@ -2,8 +2,8 @@ package com.zoomcare.candidatechallenge.controller;
 
 import com.zoomcare.candidatechallenge.exceptions.EmployeeInternalServerError;
 import com.zoomcare.candidatechallenge.exceptions.EmployeeNotFound;
-import com.zoomcare.candidatechallenge.model.Employee;
-import com.zoomcare.candidatechallenge.repository.EmployeeRepository;
+import com.zoomcare.candidatechallenge.dto.Employee;
+import com.zoomcare.candidatechallenge.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,35 +17,17 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private EmployeeService employeeService;
 
     @GetMapping("/employees/{employee_id}")
     Employee employees(@PathVariable("employee_id") Long employeeId) throws EmployeeNotFound, EmployeeInternalServerError {
         log.info("Retrieving employee by id {}", employeeId);
-
-        try {
-            Employee employee = employeeRepository.findEmployeeById(employeeId);
-
-            if (employee == null) {
-                throw new EmployeeNotFound( String.format("No entry was found for employee %s", employeeId));
-            }
-            return employee;
-        } catch (Exception ex) {
-            throw new EmployeeInternalServerError(String.format("Unexpected error occurred during request. %s", ex.getLocalizedMessage()));
-        }
+        return employeeService.getEmployeeById(employeeId);
     }
 
     @GetMapping("/employees")
     List<Employee> employees() throws EmployeeInternalServerError {
         log.info("Retrieving all employees");
-
-        try {
-            List<Employee> employees = employeeRepository.findAll();
-
-            log.info("Found {} employees", employees.size());
-            return employees;
-        } catch (Exception ex) {
-            throw new EmployeeInternalServerError(String.format("Unexpected error occurred during request. %s", ex.getLocalizedMessage()));
-        }
+        return employeeService.getAllEmployees();
     }
 }

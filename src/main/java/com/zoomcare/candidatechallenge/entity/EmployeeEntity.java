@@ -1,4 +1,4 @@
-package com.zoomcare.candidatechallenge.model;
+package com.zoomcare.candidatechallenge.entity;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @Entity(name="Employee")
 @Table(name="EMPLOYEE")
-public class Employee implements Serializable {
+public class EmployeeEntity implements Serializable {
 
     public static final long serialVersionUID = 5102227965536374244L;
 
@@ -21,10 +21,10 @@ public class Employee implements Serializable {
     private Long supervisorId;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "EMPLOYEE_ID")
-    private List<Properties> employeeProperties;
+    private List<PropertyEntity> employeeProperties = null;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "SUPERVISOR_ID")
-    private List<Properties> supervisorProperties;
+    private List<PropertyEntity> supervisorProperties;
 
 
 }

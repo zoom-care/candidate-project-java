@@ -2,7 +2,6 @@ package com.zoomcare.candidatechallenge.controller.helpers;
 
 import com.zoomcare.candidatechallenge.exceptions.EmployeeInternalServerError;
 import com.zoomcare.candidatechallenge.exceptions.EmployeeNotFound;
-import com.zoomcare.candidatechallenge.model.Employee;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -1,13 +1,13 @@
 package com.zoomcare.candidatechallenge.repository;
 
-import com.zoomcare.candidatechallenge.model.Employee;
+import com.zoomcare.candidatechallenge.entity.EmployeeEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface EmployeeRepository extends CrudRepository<Employee,Long> {
-    List<Employee> findAll();
-    Employee findEmployeeById(Long id);
+public interface EmployeeRepository extends CrudRepository<EmployeeEntity,Long> {
+    List<EmployeeEntity> findAll();
+    EmployeeEntity findEmployeeById(Long id);
 }
