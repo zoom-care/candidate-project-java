@@ -1,9 +1,11 @@
 package com.zoomcare.candidatechallenge.entity;
 
+import com.zoomcare.candidatechallenge.dto.Employee;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -25,4 +27,7 @@ public class EmployeeEntity implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "SUPERVISOR_ID")
     private Set<PropertyEntity> supervisorProperties;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "SUPERVISOR_ID", referencedColumnName = "ID")
+    private Set<EmployeeEntity> directReports;
 }

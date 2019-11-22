@@ -3,6 +3,8 @@ package com.zoomcare.candidatechallenge.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Builder
 public class Employee {
@@ -10,4 +12,5 @@ public class Employee {
     String title;
     String region;
     Supervisor supervisor;
+    List<Employee> directReports;
 }

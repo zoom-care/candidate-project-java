@@ -27,6 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> getAllEmployees() throws EmployeeInternalServerError {
         try {
             List<EmployeeEntity> employees = employeeRepository.findAll();
+            log.info("Found {} employees", employees.size());
             return employees.stream().map(this::getEmployeeFromEntity).collect(Collectors.toList());
         } catch (Exception ex) {
             log.error(ex.getLocalizedMessage(), ex);
@@ -41,6 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             if (employee == null) {
                 throw new EmployeeNotFound(String.format("No entry was found for employee %s", employeeId));
             }
+            log.info("Found employee for id {}", employee.getId());
             return getEmployeeFromEntity(employee);
         } catch (Exception ex) {
             log.error(ex.getLocalizedMessage(), ex);
@@ -55,6 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .title(getPropertyValue(PropertyKey.TITLE, entity.getEmployeeProperties()))
                 .region(getPropertyValue(PropertyKey.REGION, entity.getEmployeeProperties()))
                 .supervisor(getSupervisor(entity))
+                .directReports(entity.getDirectReports().stream().map(this::getEmployeeFromEntity).collect(Collectors.toList()))
                 .build();
 
     }
