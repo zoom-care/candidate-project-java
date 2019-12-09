@@ -49,3 +49,21 @@ A map of key/value pairs of properties assigned to an employee.
 1. Create a Fork of the repository into your personal GitHub space.
 2. Implement the feature as described above.
 3. Create a Pull Request back to the original project.
+
+
+# Solution
+
+## API Documentation
+`GET /v1/employee/{id}` - Returns an employee where {id} is the database id of the employee or 404 if the employee is not found.
+
+`GET /v1/employee/toplevel` - Return a list of all employees who do not have a supervisor.
+
+## Considerations
+* Converted project from JDBC to JPA to work with the data as objects rather than raw numbers and to take advantage of annotations.  This greatly simplifies the source code.
+* Utilized Lombok to simplify the code, removing boilerplate getter/setter logic.  Used lombok strategically as blind usage of the `@Data` annotation can have undesired side-effects.
+* Write some integration tests to exercise the solution
+ 
+
+### Swagger UI - Self-documenting API and Validation Tool
+UI is available at http://localhost:8080/swagger-ui.html
+
