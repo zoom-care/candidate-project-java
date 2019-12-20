@@ -1,7 +1,16 @@
+server:
+  servlet:
+    context-path: /candidate
 spring:
+  jpa:
+    show-sql: false
+  jersey:
+    application-path: /rest
   h2:
     console:
       enabled: true
+    hibernate:
+      ddl-auto: validate
 management:
   endpoints:
     web:
