@@ -2,6 +2,14 @@ spring:
   h2:
     console:
       enabled: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
+    hikari:
+      idle-timeout: 10000
 management:
   endpoints:
     web:
