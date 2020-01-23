@@ -1,13 +1,14 @@
 package com.zoomcare.candidatechallenge.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @IdClass(PropertyId.class)
 public class Property {
 
     @Id
-    @Column(name = "EMPLOYEE_ID")
+    @Column(name = "EMPLOYEE_ID", nullable = false)
     private Integer employeeId;
 
     @Id
@@ -48,5 +49,20 @@ public class Property {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Property)) return false;
+        Property property = (Property) o;
+        return getEmployeeId().equals(property.getEmployeeId()) &&
+                getKey().equals(property.getKey()) &&
+                getValue().equals(property.getValue());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getEmployeeId(), getKey(), getValue());
     }
 }

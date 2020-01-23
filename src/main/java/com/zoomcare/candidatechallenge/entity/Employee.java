@@ -2,6 +2,7 @@ package com.zoomcare.candidatechallenge.entity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Employee {
@@ -19,9 +20,6 @@ public class Employee {
 
     @OneToMany(mappedBy = "supervisorId")
     private List<Employee> directReports;
-
-    public Employee() {
-    }
 
     public Integer getId() {
         return id;
@@ -53,5 +51,21 @@ public class Employee {
 
     public void setDirectReports(List<Employee> directReports) {
         this.directReports = directReports;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
+        Employee employee = (Employee) o;
+        return getId().equals(employee.getId()) &&
+                Objects.equals(getSupervisorId(), employee.getSupervisorId()) &&
+                Objects.equals(getProperties(), employee.getProperties()) &&
+                Objects.equals(getDirectReports(), employee.getDirectReports());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getSupervisorId(), getProperties(), getDirectReports());
     }
 }
