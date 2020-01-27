@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +27,8 @@ import com.zoomcare.candidatechallenge.dao.EmployeeDao;
 @RequestMapping("/employees")
 public class EmployeeController {
 
+    Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+
     // TODO: add service?
     // for now let's just use a DAO - Service has extra logic like analytics, reporting, transactions, and security related things
     // also, who doesn't love Autowired? (Yum dependency injection)
@@ -31,13 +37,14 @@ public class EmployeeController {
 
     /**
      * Return an employee by its given id
-     * @param id an employees id
+     * @param employee_id an employees id
      * @return an employee by id
      */
-    @GetMapping(path="/{id}", produces="application/json")
+    @GetMapping("{employee_id:[0-9]+}")
     @ResponseBody
-    public ResponseEntity<Employee> getbyId(@PathVariable("id") Long id) {
-        Employee e = employeeDao.get(id);
+    public ResponseEntity<Employee> getbyId(@PathVariable("employee_id") Long employeeId) {
+        Employee e = employeeDao.get(employeeId);
+        logger.info("Received employee_id {}", employeeId);
         return (e==null) ? ResponseEntity.ok().body(e) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
@@ -49,7 +56,7 @@ public class EmployeeController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Employee> create(@RequestBody Employee resource) {
         Employee e = employeeDao.save(resource);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(e.getId()).toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{employeeId}").buildAndExpand(e.getId()).toUri();
         return ResponseEntity.created(location).body(e);
     }
 
