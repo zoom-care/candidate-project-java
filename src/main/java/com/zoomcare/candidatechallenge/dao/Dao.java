@@ -1,4 +1,4 @@
-package com.zoomcare.dao;
+package com.zoomcare.candidatechallenge.dao;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ public interface Dao<M> {
 
     List<M> getAll();
 
-    void save(M model);
+    M save(M model);
 
-    void update(M model);
+    int update(M model);
 
     void delete(M model);
 }

@@ -1,4 +1,4 @@
-package com.zoomcare.candidatechallenge;
+package com.zoomcare.candidatechallenge.model;
 
 /**
  * Property model representing a record in the property table
