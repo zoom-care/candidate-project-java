@@ -1,7 +1,8 @@
 package com.zoomcare.candidatechallenge.controller;
 
 import java.net.URI;
-import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.zoomcare.candidatechallenge.model.Employee;
-import com.zoomcare.candidatechallenge.dao.EmployeeDao;
+import com.zoomcare.candidatechallenge.repository.EmployeeRepository;
+import com.zoomcare.candidatechallenge.repository.PropertyRepository;
 
 @RestController
 @RequestMapping("/employees")
@@ -33,7 +35,15 @@ public class EmployeeController {
     // for now let's just use a DAO - Service has extra logic like analytics, reporting, transactions, and security related things
     // also, who doesn't love Autowired? (Yum dependency injection)
     @Autowired
-    private EmployeeDao employeeDao;
+    private EmployeeRepository repository;
+
+    public EmployeeRepository getRepository() {
+        return repository;
+    }
+ 
+    public void setRepository(EmployeeRepository repository) {
+        this.repository = repository;
+    }
 
     /**
      * Return an employee by its given id
@@ -43,9 +53,13 @@ public class EmployeeController {
     @GetMapping("{employee_id:[0-9]+}")
     @ResponseBody
     public ResponseEntity<Employee> getbyId(@PathVariable("employee_id") Long employeeId) {
-        Employee e = employeeDao.get(employeeId);
+        Optional<Employee> opt = repository.findById(employeeId);
         logger.info("Received employee_id {}", employeeId);
-        return (e!=null) ? ResponseEntity.ok().body(e) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        Employee e = opt.orElse(null);
+        if(e!=null) {
+            return ResponseEntity.ok().body(e);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     /**
@@ -55,7 +69,7 @@ public class EmployeeController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Employee> create(@RequestBody Employee resource) {
-        Employee e = employeeDao.save(resource);
+        Employee e = repository.save(resource);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{employeeId}").buildAndExpand(e.getId()).toUri();
         return ResponseEntity.created(location).body(e);
     }
@@ -66,7 +80,7 @@ public class EmployeeController {
      */
     @GetMapping(produces="application/json")
     @ResponseBody
-    public Collection<Employee> getAll() {
-        return employeeDao.getAll();
+    public List<Employee> getAll() {
+        return repository.findAll();
     }
 }
