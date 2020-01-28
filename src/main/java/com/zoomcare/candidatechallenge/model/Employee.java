@@ -1,17 +1,52 @@
 package com.zoomcare.candidatechallenge.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * Employee model represents the working data for an employee
  * 
  */
-public class Employee {
+@Entity
+@Table(name="employee")
+public class Employee implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -3042028486047948723L;
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
-    private long supervisorId;
+
+    @JsonIgnore
+    @Column(name="supervisor_id")
+    private Long supervisorId; // auto-boxed because certain employees do not have a supervisor
+
+    @OneToMany(fetch=FetchType.LAZY)
+    @JoinColumn(name="employee_id")
+    @OnDelete(action=OnDeleteAction.CASCADE)
     private List<Property> properties;
+
+    @OneToMany(fetch=FetchType.LAZY)
+    @JoinColumn(name="supervisor_id", referencedColumnName="id")
     private List<Employee> directReports;
 
     public Employee() {
@@ -25,8 +60,6 @@ public class Employee {
         this.properties = properties;
         this.directReports = directReports;
     }
-
-    // TODO: hibernate or some other ORM framework could provide functions to auto join the appropriate tables for this
 
     public long getId() {
         return id;

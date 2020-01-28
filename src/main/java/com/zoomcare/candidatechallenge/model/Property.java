@@ -1,9 +1,24 @@
 package com.zoomcare.candidatechallenge.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Property model representing a record in the property table
  */
+@Entity
+@Table(name="property")
 public class Property {
+
+    @Id
+    @Column(name="employee_id")
+    @JsonIgnore
     private long employeeId;
     private String key;
     private String value;
