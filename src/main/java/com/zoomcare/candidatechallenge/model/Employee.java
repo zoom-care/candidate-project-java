@@ -1,6 +1,7 @@
 package com.zoomcare.candidatechallenge.model;
 
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Employee model represents the working data for an employee
@@ -14,13 +15,15 @@ public class Employee {
     private List<Employee> directReports;
 
     public Employee() {
-
+        this.properties = new ArrayList<Property>();
+        this.directReports = new ArrayList<Employee>();
     }
 
-    public Employee(long id, long supervisorId, List<Property> properties) {
+    public Employee(long id, long supervisorId, List<Property> properties, List<Employee> directReports) {
         this.id = id;
         this.supervisorId = supervisorId;
         this.properties = properties;
+        this.directReports = directReports;
     }
 
     // TODO: hibernate or some other ORM framework could provide functions to auto join the appropriate tables for this
@@ -52,9 +55,7 @@ public class Employee {
     }
 
     public void addProperty(Property property) {
-        if(this.properties!=null) {
-            this.properties.add(property);
-        }
+        this.properties.add(property);
     }
 
     // Other Employee objects require information from a different records but the DAO handles that - not the model itself
@@ -67,9 +68,7 @@ public class Employee {
         this.directReports = directReports;
     }
 
-    public void addDirectReport(Employee directReport) {
-        if(this.directReports!=null) {
-            this.directReports.add(directReport);
-        }
+    public void addDirectReport(Employee e) {
+        this.directReports.add(e);
     }
 }

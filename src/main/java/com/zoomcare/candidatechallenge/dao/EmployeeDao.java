@@ -1,14 +1,20 @@
 package com.zoomcare.candidatechallenge.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -28,11 +34,13 @@ import com.zoomcare.candidatechallenge.model.Property;
 @Repository
 public class EmployeeDao implements Dao<Employee> {
 
+    Logger logger = LoggerFactory.getLogger(EmployeeDao.class);
+
     // let's use the Spring jdbc template - simplest integration
     private JdbcTemplate jdbcTemplate;
 
     public static String EmployeesTable = "employee";
-    public static String PropertiesTable = "properties";
+    public static String PropertiesTable = "property"; // TABLE is actually called PROPERTY not PROPERTIES per the README.md
 
     @Autowired
     public void init(DataSource dataSource) {
@@ -49,17 +57,59 @@ public class EmployeeDao implements Dao<Employee> {
 
     @Override
     public Employee get(long id) {
+
         Employee employee = this.jdbcTemplate.queryForObject("select * from " + EmployeesTable + " where id=?", new Object[]{id},
             new EmployeeMapper());
-        // TODO: retrieve all properties for employee
+        List<Property> propertyList = this.jdbcTemplate.query("select * from " + PropertiesTable + " where employee_id=?", new Object[]{id},
+            new PropertyMapper());
+        
+        // get all direct reports - another way to do it - seems a bit overkill
+        // List<Employee> directReports = this.jdbcTemplate.query(
+        //     "SELECT "+
+        //         "e.id as supervisor_id,"+
+        //         "ARRAY_AGG(DISTINCT m.id) as direct_report"+
+        //         "FROM employee e LEFT JOIN employee m ON m.supervisor_id = e.id group by e.id;"
+        // );
+
+        List<Employee> directReports = this.jdbcTemplate.query(
+            "select * from " + EmployeesTable + " where supervisor_id =?", new Object[]{id},
+            new EmployeeMapper());
+
+        employee.setProperties(propertyList);
+        employee.setDirectReports(directReports);
         return employee;
     }
 
     @Override
     public List<Employee> getAll() {
-        List<Employee> list = this.jdbcTemplate.query("select * from " + EmployeesTable + "", new EmployeeMapper());
-        // TODO: retrieve all properties for employees
-        return list;
+
+        // grab all employees and their respective properties
+        EmployeePropertyRowCallbackHandler eprc = new EmployeePropertyRowCallbackHandler();
+        this.jdbcTemplate.query("select "+
+            "employee_id, key, value "+
+            "from property " +
+            "inner join employee e on property.employee_id = e.id "+
+            "order by e.id;",
+            eprc);
+        Map<Long, Employee> employeesAndProperties = eprc.getEmployeeMap();
+
+        // grab all direct reports for all employees where applicable
+        this.jdbcTemplate.query("SELECT "+
+        "e.id as supervisor_id, " +
+        "m.id as employee_id " +
+        "FROM employee e INNER JOIN employee m ON m.supervisor_id = e.id order by e.id;",
+        new RowCallbackHandler(){
+            // map all direct reports to retrieved employees
+            @Override
+            public void processRow(ResultSet rs) throws SQLException {
+                Long supervisorId = rs.getLong("supervisor_id");
+                Long employeeId = rs.getLong("employee_id");
+                Employee employee = employeesAndProperties.get(employeeId);
+                employeesAndProperties.get(supervisorId).addDirectReport(employee);
+            }
+        });
+
+        return new ArrayList<Employee>(employeesAndProperties.values()); // not sure this is O(1)
     }
 
     @Override
@@ -98,7 +148,6 @@ public class EmployeeDao implements Dao<Employee> {
             "update properties set key=?, value=? where employee_id=?",
             new PropertyBatcherSetter(employeeProperties, employeeProperties.size())
         ).length;
-        // TODO: refresh direct reports here?
         return count;
 
     }
@@ -113,8 +162,16 @@ public class EmployeeDao implements Dao<Employee> {
         public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
             Employee employee = new Employee();
             employee.setId(rs.getLong("id"));
-            employee.setSupervisorId(rs.getLong("supervisor_id"));
             return employee;
+        }
+    }
+
+    private static final class PropertyMapper implements RowMapper<Property> {
+        public Property mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Property prop = new Property();
+            prop.setKey(rs.getString("key"));
+            prop.setValue(rs.getString("value"));
+            return prop;
         }
     }
 
