@@ -28,7 +28,7 @@ import org.hibernate.annotations.OnDeleteAction;
 public class Employee implements Serializable {
 
     /**
-     *
+     * Serializable
      */
     private static final long serialVersionUID = -3042028486047948723L;
 
@@ -77,8 +77,6 @@ public class Employee implements Serializable {
         this.supervisorId = supervisorId;
     }
 
-    // the Property objects require information from a different table than the basic Employee fields, but the DAO handles that - not the model itself
-
     public List<Property> getProperties() {
         return properties;
     }
@@ -90,8 +88,6 @@ public class Employee implements Serializable {
     public void addProperty(Property property) {
         this.properties.add(property);
     }
-
-    // Other Employee objects require information from a different records but the DAO handles that - not the model itself
 
     public List<Employee> getDirectReports() {
         return this.directReports;

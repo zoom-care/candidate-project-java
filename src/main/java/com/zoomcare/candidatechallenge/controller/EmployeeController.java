@@ -23,8 +23,13 @@ import org.springframework.http.ResponseEntity;
 
 import com.zoomcare.candidatechallenge.model.Employee;
 import com.zoomcare.candidatechallenge.repository.EmployeeRepository;
-import com.zoomcare.candidatechallenge.repository.PropertyRepository;
 
+/**
+ * EmployeeController handles REST requests related to Employees in the system
+ * @author Christian Bernard
+ * @version 0.1
+ * @since 2020-01-28
+ */
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
