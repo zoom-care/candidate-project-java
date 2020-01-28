@@ -45,7 +45,7 @@ public class EmployeeController {
     public ResponseEntity<Employee> getbyId(@PathVariable("employee_id") Long employeeId) {
         Employee e = employeeDao.get(employeeId);
         logger.info("Received employee_id {}", employeeId);
-        return (e==null) ? ResponseEntity.ok().body(e) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return (e!=null) ? ResponseEntity.ok().body(e) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     /**
