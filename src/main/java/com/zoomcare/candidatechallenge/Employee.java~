@@ -1,0 +1,31 @@
+package com.zoomcare.candidatechallenge;
+
+import java.math.BigInteger;
+
+public class Employee {
+    private BigInteger id;
+    private BigInteger supervisorId;
+    
+    protected Employee(){}
+
+    public Employee(BigInteger id, BigInteger supervisorId){
+	this.id = id;
+	this.supervisorId = supervisorId;
+    }
+
+    public BigInteger getId(){
+	return id;
+    }
+
+    public void setId(BigInteger id){
+	this.id = id;
+    }
+
+    public BigInteger getSupervisorId(){
+	return supervisorId;
+    }
+
+    public void setSupervisorId(BigInteger supervisorId){
+	this.supervisorId = supervisorId;
+    }
+}

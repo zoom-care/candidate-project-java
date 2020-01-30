@@ -1,0 +1,18 @@
+.employee-item {
+    margin-top: 10px;
+}
+
+.employee-item-header {
+    border: 1px solid #CBCBCB;
+    padding: 10px;
+}
+
+.employee-item-props {
+    border: 1px solid #CBCBCB;
+    padding: 10px;
+    border-top: none;
+}
+
+.prop-item + .prop-item {
+    border-top: 1px solid #ABABAB
+}
