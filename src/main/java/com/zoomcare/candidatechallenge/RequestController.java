@@ -15,6 +15,13 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
+import org.json.JSONObject;
+import org.json.JSONArray;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+
 @Controller
 public class RequestController {
 
@@ -23,6 +30,55 @@ public class RequestController {
 	return "index";
     }
 
+    /*
+      While this method does build the object I want, I am presently unfamiliar with
+      Spring's translation of JSON Objects and I wasn't able to get the page to render
+      correctly. At the moment it also does not filter by employee, though that can be
+      easily added in the stream filter for all employees. Given that the issue is
+      primarily a lack of Spring understanding, I've opted to leave this part unfinished
+     */
+    @GetMapping(path = "/hierarchy", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> getHierarchy(@RequestParam(name = "id") String id, Model model){
+	List<Employee> allEmps = findAllEmployeesWithProperties();
+	Map<BigInteger, Employee> empMap = new HashMap<>();
+	for(Employee emp : allEmps){
+	     empMap.put(emp.getId(), emp);
+	}
+
+	for(Employee emp : allEmps){
+	    if(emp.getSupervisorId() != null)
+		empMap.get(emp.getSupervisorId()).getSubEmployees().add(emp);
+	}
+
+	List<Employee> topLevelEmployees = allEmps.stream().filter(e -> e.getSupervisorId() == null).collect(Collectors.toList());
+
+	List<JSONObject> responseList = new ArrayList();
+	for(Employee emp : topLevelEmployees){
+	    responseList.add(buildJsonEmployeeResponse(emp));
+	}
+	return new ResponseEntity<Object>(responseList, HttpStatus.OK);
+    }
+
+    private JSONObject buildJsonEmployeeResponse(Employee emp){
+	JSONObject rtv = new JSONObject();
+	rtv.put("id", emp.getId());
+	rtv.put("supervisorId", emp.getSupervisorId());
+	
+	JSONArray props = new JSONArray();
+	for(Property prop : emp.getProperties()){
+	    JSONObject propObj = new JSONObject();
+	    propObj.put(prop.getKey(), prop.getValue());
+	    props.put(propObj);
+	}
+	rtv.put("properties", props);
+
+	JSONArray subEmployees = new JSONArray();
+	for(Employee subEmp : emp.getSubEmployees()){
+	    subEmployees.put(buildJsonEmployeeResponse(subEmp));
+	}
+	rtv.put("subEmployees", subEmployees);
+	return rtv;
+    }
 
     @GetMapping("/allEmployees")
     public String fullEmployeeList(Model model){

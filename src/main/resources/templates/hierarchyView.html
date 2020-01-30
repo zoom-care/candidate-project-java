@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Full Employee List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/employees.css}"/>
+</head>
+<body>
+  <div
+    th:each="employee : ${employeeList}"
+    class="employee-item"
+    >
+    <div
+      class="employee-item-header"
+      >
+    <span
+      class="employee-id"
+      th:text="'Employee ID: ' + ${employee.id}"
+      />
+    <span
+      class="supervisor-id"
+      th:text="${employee.supervisorId != null} ? 'Supervisor ID: ' + ${employee.supervisorId} : ''"
+      />
+    </div>
+    <div
+      class="employee-item-props"
+      >
+      <div
+	class="prop-item"
+	th:each="prop : ${employee.properties}"
+	>
+	<span
+	  th:text="${prop.key} + ':'"
+	  />
+	<span
+	  th:text="${prop.value}"
+	  />
+      </div>
+    </div>
+  </div>
+    <p th:text="'Total employee count:' + ${employeeCount} + '!'" />
+</body>
+</html>
