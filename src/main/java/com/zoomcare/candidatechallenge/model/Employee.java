@@ -1,7 +1,6 @@
 package com.zoomcare.candidatechallenge.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.zoomcare.candidatechallenge.exception.EmployeePropertyNotFoundExcpetion;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.ArrayList;

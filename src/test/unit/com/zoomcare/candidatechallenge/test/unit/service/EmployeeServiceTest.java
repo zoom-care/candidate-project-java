@@ -57,9 +57,7 @@ public class EmployeeServiceTest {
 
     @Test(expected = EmployeeNotFoundException.class)
     public void getEmployeeByIdNotFound() {
-        Employee found = this.employeeService.getEmployee(1L);
-
-        assertTrue(true);
+        this.employeeService.getEmployee(1L);
     }
 
     @Test
