@@ -4,7 +4,7 @@ This file describes assumptions about this project and motivates some of the des
 ### Project requirements:
 - There is a database with tables `Employee` and `Properties`.
 - Implement endpoint: Get employee by id
-- Implement endpoint: Get employees by supervisor id
+- Implement endpoint: Get toplevel employees
 - Each employee returned will have its associated properties in Map form.
 - Each employee also has a List<Employee> containing the supervisors.
 
@@ -16,4 +16,5 @@ This file describes assumptions about this project and motivates some of the des
 3. There are no requirements around logging. For this reason I am using the built in logger to java, but I would use log4j2 or some sort of logging framework in real life.
 4. There are no requirements around http response codes ...
 5. There are no requirements around API framework for this reason I am using jersey because I prefer it over spring.
-
+6. I am not using the most up to date versions of junit and jersey because I am not 100% familiar with these versions and I don't want to risk wasting time on understanding particularities of the updated versions. If this were a real project however I would strive to use the most up to date versions of dependencies.
+7. I am not implementing spring profiles because this is a simple project. If it were a real project I would use profiles and load application properties based on that.
