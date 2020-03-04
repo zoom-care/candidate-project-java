@@ -1,7 +1,7 @@
 package com.zoomcare.candidatechallenge.resources;
 
 
-import com.zoomcare.candidatechallenge.model.Employee;
+import com.zoomcare.candidatechallenge.model.db.Employee;
 import com.zoomcare.candidatechallenge.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

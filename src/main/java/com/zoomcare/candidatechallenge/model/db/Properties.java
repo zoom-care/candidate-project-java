@@ -1,9 +1,6 @@
-package com.zoomcare.candidatechallenge.model;
+package com.zoomcare.candidatechallenge.model.db;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigInteger;
 
 @Entity
@@ -11,9 +8,11 @@ import java.math.BigInteger;
 public class Properties {
 
     @Id
-    @Column
+    @Column(name = "EMPLOYEE_ID")
     private BigInteger employeeId;
+    @Column(name = "KEY")
     private String key;
+    @Column(name = "VALUE")
     private String value;
 
     public Properties() {

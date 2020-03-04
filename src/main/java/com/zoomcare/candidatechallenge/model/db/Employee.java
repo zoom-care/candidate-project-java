@@ -1,19 +1,17 @@
-package com.zoomcare.candidatechallenge.model;
+package com.zoomcare.candidatechallenge.model.db;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.Map;
 
 @Entity
 @Table(name = "EMPLOYEE")
 public class Employee {
 
     @Id
-    @Column(name="ID", nullable = true)
+    @Column(name="ID")
     private BigInteger id;
-    @Column(name="SUPERVISOR_ID", nullable = true)
+    @Column(name="SUPERVISOR_ID")
     private BigInteger supervisorId;
 
     public Employee() {

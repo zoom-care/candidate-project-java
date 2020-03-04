@@ -11,6 +11,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
+
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
@@ -44,7 +45,7 @@ public class DbConfig {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setDataSource(dataSource());
         factory.setJpaVendorAdapter(jpaVendorAdapter());
-        factory.setPackagesToScan("com.zoomcare.candidatechallenge.model");
+        factory.setPackagesToScan("com.zoomcare.candidatechallenge.model.db");
         return factory;
     }
 }
