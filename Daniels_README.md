@@ -2,10 +2,11 @@
 This file describes assumptions about this project and motivates some of the design choices.
 
 #### How to start the project.
-1. You need java installed. Run `java --version` from command line to make sure java is installed.
-2. You need maven installed. Run `mvn --version` from command line to make sure maven is installed.
-3. You can build the project with `mvn clean install` from the command line
-4. You can run the project with `./mvnw spring-boot:run` from the command line
+1. Clone the project and cd to the project folder.
+2. You need java installed. Run `java --version` from command line to make sure java is installed.
+3. You need maven installed. Run `mvn --version` from command line to make sure maven is installed.
+4. You can build the project with `mvn clean install` from the command line
+5. You can run the project with `./mvnw spring-boot:run` from the command line
 
 #### Api docs.
 To get an employee by id:
