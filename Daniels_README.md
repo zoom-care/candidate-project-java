@@ -46,4 +46,4 @@ http://localhost:8080/employee/toplevel
 ##### Strengths
 1. This demonstrates many elements of a full blown enterprise level microservice.
 2. The architecture in general is quite scalable disregarding some database and data model quirks.
-3. This project meets the requirements and goes above and beyong what was asked for in the instructions. This project demonstrates a solid understanding of spring, how to use jersey in conjunction with a springboot project and how to use spring/JPA for creating a data model and database repositories.
+3. This project meets the requirements and goes above and beyond what was asked for in the instructions. This project demonstrates a solid understanding of spring, how to use jersey in conjunction with a springboot project and how to use spring/JPA for creating a data model and database repositories.
