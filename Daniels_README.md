@@ -1,4 +1,4 @@
-##Daniels Readme
+## Daniels Readme
 This file describes assumptions about this project and motivates some of the design choices.
 
 #### How to start the project.
