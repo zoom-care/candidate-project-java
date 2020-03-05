@@ -12,7 +12,4 @@ public interface PropertiesRepository extends CrudRepository<Properties, BigInte
     @Query(value = "SELECT * FROM PROPERTY WHERE EMPLOYEE_ID = ?1", nativeQuery = true)
     List<Properties> getAllPropertiesByEmployeeId(@Param("id") BigInteger id);
 
-    @Query(value = "SELECT * FROM PROPERTY WHERE VALUE LIKE '%CEO%' Or VALUE LIKE '%President%'", nativeQuery = true)
-    List<Properties> getTopLevelEmployeeProperties();
-
 }

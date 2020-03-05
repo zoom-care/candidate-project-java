@@ -1,6 +1,9 @@
 package com.zoomcare.candidatechallenge.resources;
 
 
+import com.zoomcare.candidatechallenge.exception.InvalidDataTypeException;
+import com.zoomcare.candidatechallenge.exception.UserDoesNotExistException;
+import com.zoomcare.candidatechallenge.model.ClientEmployee;
 import com.zoomcare.candidatechallenge.model.db.Employee;
 import com.zoomcare.candidatechallenge.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.math.BigInteger;
+import java.util.List;
 
 @Component
 @Path("employee")
@@ -22,18 +26,23 @@ public class EmployeeResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getEmployeeById(@QueryParam("id") BigInteger id) {
-        Employee employee = employeeService.getEmployeeById(id);
+    public Response getEmployeeById(@QueryParam("id") String id) throws UserDoesNotExistException, InvalidDataTypeException {
+        Employee employee = null;
+        BigInteger bigInteger = null;
+        try {
+            bigInteger = new BigInteger(id);
+        } catch (Exception e) {
+            throw new InvalidDataTypeException("The data type for id was invalid, it must be a number.");
+        }
+        employee = employeeService.getEmployeeById(bigInteger);
         return Response.ok(employee).build();
     }
 
     @GET
     @Path("/toplevel")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTopLevelEmployees() {
-        BigInteger bigInteger = new BigInteger("3");
-        BigInteger bigInteger2 = new BigInteger("4");
-        Employee employee = new Employee(bigInteger, bigInteger2);
-        return Response.ok(employee).build();
+    public Response getTopLevelEmployees() throws UserDoesNotExistException {
+        List<ClientEmployee> employees = employeeService.getTopLevelEmployees();
+        return Response.ok(employees).build();
     }
 }

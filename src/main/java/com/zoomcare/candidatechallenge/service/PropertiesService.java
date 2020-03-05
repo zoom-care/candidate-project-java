@@ -20,10 +20,6 @@ public class PropertiesService {
         this.propertiesRepsitory = propertiesRepsitory;
     }
 
-    public List<Properties> getTopLevelProperties() {
-        return this.propertiesRepsitory.getTopLevelEmployeeProperties();
-    }
-
     public Map<String, String> getPropertiesByEmployeeId(BigInteger id) {
         List<Properties> properties = propertiesRepsitory.getAllPropertiesByEmployeeId(id);
         Map<String, String> propertiesMap = new HashMap<>();
@@ -32,7 +28,4 @@ public class PropertiesService {
         }
         return propertiesMap;
     }
-
-
-
 }

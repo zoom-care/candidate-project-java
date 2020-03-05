@@ -10,4 +10,7 @@ public interface EmployeeRepository extends CrudRepository<Employee, BigInteger>
 
     @Query(value = "SELECT * FROM EMPLOYEE ", nativeQuery = true)
     public List<Employee> getAllEmployees();
+
+    @Query(value = "SELECT * FROM EMPLOYEE WHERE SUPERVISOR_ID = 1 OR SUPERVISOR_ID IS NULL", nativeQuery = true)
+    public List<Employee> getTopLevelEmployees();
 }
