@@ -38,10 +38,9 @@ http://localhost:8080/employee/toplevel
 7. I am not implementing spring profiles because this is a simple project. If it were a real project I would use profiles and load application properties based on that.
 
 ##### Weaknesses
-1. I did not write any unit tests because doing this project took more time than I thought it was going to take and there wasn't a whole lot to test. In reality I would have at a minimum wrote unit tests for all service methods. I would have used mockito to mock the repositories for these tests.
-2. The data model is not ideal. In real life I would not have implemented so many getById functions. I would have used JPA a little more to created relationships between the Employee and Properties if it were possible.
-3. The exception handling is not idea. It seemed like for this case the only real thing to worry about was sending in ids that did not exist in the database and bad data through this endpoint. Therefore I wrote exception mappers for this case with the appropriate http response codes, it is not a super maintainable pattern though if this application were to grow. Alittle refactoring would be necessary.
-4. The model around Employee for returning to the user is not ideal. I made ClientEmployee extend Employee so to add properties that were not supposed to be part of the data model. A better pattern could be used though.
+1. The data model is not ideal. In real life I would not have implemented so many getById functions. I would have used JPA a little more to created relationships between the Employee and Properties if it were possible.
+2. The exception handling is not ideal. It seemed like for this case the only real thing to worry about was sending in ids that did not exist in the database and bad data through this endpoint. Therefore I wrote exception mappers for this case with the appropriate http response codes, it is not a super maintainable pattern though if this application were to grow. Alittle refactoring would be necessary.
+3. The model around Employee for returning to the user is not ideal. I made ClientEmployee extend Employee so to add properties that were not supposed to be part of the data model. A better pattern could be used though.
 
 ##### Strengths
 1. This demonstrates many elements of a full blown enterprise level microservice.
