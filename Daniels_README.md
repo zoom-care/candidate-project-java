@@ -9,15 +9,20 @@ This file how to start/run the project. It describes assumptions about this proj
 5. You can run the project with `./mvnw spring-boot:run` from the command line
 
 #### Api docs.
-To get an employee by id:
+### To get an employee by id:
 `
 http://localhost:8080/employee?id=<employeeId>
 `
 
-To get all toplevel employees:
+### To get all toplevel employees:
 `
 http://localhost:8080/employee/toplevel
 `
+
+#### Response codes
+`200` - Resource is found and no exceptions are thrown.
+
+`400` - If a non numeric string is sent in to retrieve an employee.
 
 ### Project requirements:
 - There is a database with tables `Employee` and `Properties`.
