@@ -6,8 +6,9 @@ This file how to start/run the project. It describes assumptions about this proj
 2. You need java installed. Run `java --version` from command line to make sure java is installed.
 3. You need maven installed. Run `mvn --version` from command line to make sure maven is installed.
 4. You can build the project with `mvn clean install` from the command line
-5. You can run the project with `./mvnw spring-boot:run` from the command line
-6. You can use postman to create http requests to call the service https://www.postman.com/
+5. You can run the unit/integration tests with `mvn test` from the command line
+6. You can run the project with `./mvnw spring-boot:run` from the command line
+7. You can use postman to create http requests to call the service https://www.postman.com/
 
 #### Project requirements as I understood them:
 - Use embeded database with tables `Employee` and `Properties`.
@@ -48,8 +49,9 @@ http://localhost:8080/employee/toplevel
 2. The exception handling is not ideal. It seemed like for this case the only real thing to worry about was sending in ids that did not exist in the database and bad data through this endpoint. Therefore I wrote exception mappers for this case with the appropriate http response codes, it is not a super maintainable pattern though if this application were to grow. If it were to grow, then a little refactoring would be necessary.
 3. The model around Employee for returning to the user is not ideal. I made ClientEmployee extend Employee so to add properties that were not supposed to be part of the data model. A better pattern could be used though.
 4. The setters in ClientEmployee are not ideal. This makes the object mutable. For the sake of integration testing I did this, but i would strive for a pattern without setters in a real project. Maybe using @JsonProperty or somthing similar.
+5. The logging is a bit noisy when running the tests. I would clean this up in a real project.
 
 ## Strengths
-1. This demonstrates many elements of a full blown enterprise level microservice.
+1. This demonstrates many elements of a full blown enterprise level service.
 2. The architecture in general is quite scalable disregarding some database and data model quirks.
 3. This project meets the requirements and goes above and beyond what was asked for in the instructions. This project demonstrates a solid understanding of spring, how to use jersey in conjunction with a springboot project and how to use spring/JPA for creating a data model and database repositories, how to use junit/mockito for unit testing and also how to use RestTemplate for doing integration testsing against an embedded H2 db.
