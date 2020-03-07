@@ -3,7 +3,6 @@ package com.zoomcare.candidatechallenge.service;
 import com.zoomcare.candidatechallenge.exception.UserDoesNotExistException;
 import com.zoomcare.candidatechallenge.model.ClientEmployee;
 import com.zoomcare.candidatechallenge.model.db.Employee;
-import com.zoomcare.candidatechallenge.model.db.Properties;
 import com.zoomcare.candidatechallenge.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,6 +52,7 @@ public class EmployeeService {
         if (employee.getSupervisorId() != null) {
             Employee supervisor = employeeRepository.findById(employee.getSupervisorId()).orElseThrow(() -> new UserDoesNotExistException(String.format("The user does not exist with id: %s", employee.getSupervisorId().toString())));
             Map<String, String> properties = propertiesService.getPropertiesByEmployeeId(supervisor.getId());
+            //Creating an employee object as the supervisor, so you don't need the supervisor list.
             ClientEmployee clientEmployee = new ClientEmployee(supervisor, properties, null);
             supervisorList.add(clientEmployee);
         }
