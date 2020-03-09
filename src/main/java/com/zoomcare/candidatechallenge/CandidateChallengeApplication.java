@@ -1,5 +1,6 @@
 package com.zoomcare.candidatechallenge;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.boot.SpringApplication;
@@ -11,20 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 @EnableAutoConfiguration
-public class CandidateChallengeApplication
-{
+public class CandidateChallengeApplication {
 	@RequestMapping("/")
-	String home() {
+	String home() throws SQLException {
 		EmployeeController controller = new EmployeeController();
-		List<Employee> employees = controller.getAll();
-		if (employees == null) {
-			return "employees is null";
-		}
-		Employee employee = employees.get(0);
+		Employee employee = controller.get(1);
 		if (employee == null) {
 			return "employee is null";
 		}
-		return "Employee ID: " + employee.getId() + ", Supervisor ID: " + employee.getSupervisorId();
+		List<Employee> directReports = employee.getDirectReports();
+		return "Employee ID: " + employee.getId() + ", Supervisor ID: " + employee.getSupervisorId() + ", Direct Reports: " + directReports.toString();
 	}
 
 	public static void main(String[] args)

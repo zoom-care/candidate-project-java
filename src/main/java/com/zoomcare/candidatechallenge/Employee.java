@@ -1,20 +1,19 @@
 package com.zoomcare.candidatechallenge;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity
 public class Employee {
 
     // Properties
-    @Id
-    @GeneratedValue
     private int id;
     private int supervisorId;
+    private List<Employee> directReports;
 
     // Default constructor
-    public Employee() { }
+    public Employee() {
+        this.directReports = new ArrayList<>();
+     }
 
     // Parameterized constructor
     /**
@@ -24,9 +23,14 @@ public class Employee {
      * @param supervisorId
      */
     public Employee(int id, int supervisorId) {
-        System.out.println("Employee constructor");
         this.id = id;
         this.supervisorId = supervisorId;
+        this.directReports = new ArrayList<>();
+    }
+
+    @Override
+    public String toString() {
+        return "Employee: { id: " + this.id + ", supervisorId: " + this.supervisorId + " }";
     }
 
     // Accessors
@@ -35,7 +39,6 @@ public class Employee {
      * @return Employee ID
      */
     public int getId() {
-        System.out.println("Employee.getId");
         return id;
     }
 
@@ -43,7 +46,39 @@ public class Employee {
      * @return Supervisor ID
      */
     public int getSupervisorId() {
-        System.out.println("Employee.getSupervisorId");
         return supervisorId;
+    }
+
+    /**
+     * @return List of direct reports
+     */
+    public List<Employee> getDirectReports() {
+        return directReports;
+    }
+
+    // Mutators
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setSupervisorId(int supervisorId) {
+        this.supervisorId = supervisorId;
+    }
+
+    public void setDirectReports(List<Employee> directReports) {
+        this.directReports = directReports;
+    }
+
+    public void pushDirectReport(Employee employee) {
+        this.directReports.add(employee);
+    }
+
+    public void popDirectReport() {
+        this.directReports.remove(directReports.size() - 1);
+    }
+
+    public void clearDirectReports() {
+        this.directReports.clear();
     }
 }
