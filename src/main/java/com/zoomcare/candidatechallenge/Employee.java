@@ -9,10 +9,12 @@ public class Employee {
     private int id;
     private int supervisorId;
     private List<Employee> directReports;
+    private List<Property> properties;
 
     // Default constructor
     public Employee() {
         this.directReports = new ArrayList<>();
+        this.properties = new ArrayList<>();
      }
 
     // Parameterized constructor
@@ -26,11 +28,12 @@ public class Employee {
         this.id = id;
         this.supervisorId = supervisorId;
         this.directReports = new ArrayList<>();
+        this.properties = new ArrayList<>();
     }
 
     @Override
     public String toString() {
-        return "Employee: { id: " + this.id + ", supervisorId: " + this.supervisorId + " }";
+        return "{ id: " + this.getId() + ", supervisorId: " + this.getSupervisorId() + ", " +  this.getProperties().toString().replace("[", "").replace("]", "") + " }";
     }
 
     // Accessors
@@ -39,21 +42,28 @@ public class Employee {
      * @return Employee ID
      */
     public int getId() {
-        return id;
+        return this.id;
     }
 
     /**
      * @return Supervisor ID
      */
     public int getSupervisorId() {
-        return supervisorId;
+        return this.supervisorId;
     }
 
     /**
      * @return List of direct reports
      */
     public List<Employee> getDirectReports() {
-        return directReports;
+        return this.directReports;
+    }
+
+    /**
+     * @return List of properties
+     */
+    public List<Property> getProperties() {
+        return this.properties;
     }
 
     // Mutators
@@ -70,6 +80,10 @@ public class Employee {
         this.directReports = directReports;
     }
 
+    public void setProperties(List<Property> properties) {
+        this.properties = properties;
+    }
+
     public void pushDirectReport(Employee employee) {
         this.directReports.add(employee);
     }
@@ -80,5 +94,17 @@ public class Employee {
 
     public void clearDirectReports() {
         this.directReports.clear();
+    }
+
+    public void pushProperty(Property property) {
+        this.properties.add(property);
+    }
+
+    public void popProperty() {
+        this.properties.remove(properties.size() - 1);
+    }
+
+    public void clearProperties() {
+        this.properties.clear();
     }
 }

@@ -11,10 +11,9 @@ public class DataUtils {
     private static final String password = "";
     private static final String url = "jdbc:h2:mem:testdb";
 
-    // Parameterized constructor
     /**
      * 
-     * @return
+     * @return Connection to H2 database
      * @throws SQLException
      */
     public static Connection getConnection() throws SQLException {

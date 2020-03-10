@@ -40,9 +40,9 @@ public class EmployeeRepository implements IEmployeeRepository {
     }
 
     @Override
-    public List<EmployeeDO> getBySupervisor(int supervisorId) throws Exception {
+    public List<EmployeeDO> getBySupervisor(int supervisorId) throws SQLException {
         List<EmployeeDO> employees = new ArrayList<>();
-        String query = "SELECT id, supervisor_id FROM employee WHERE supervisor_id = " + supervisorId;
+        String query = "SELECT id, supervisor_id FROM employee WHERE ISNULL(supervisor_id, 0) = " + supervisorId;
 
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(query);
@@ -59,9 +59,22 @@ public class EmployeeRepository implements IEmployeeRepository {
     }
 
     @Override
-    public List<EmployeeDO> getAll() {
-        // TODO Auto-generated method stub
-        return null;
+    public List<EmployeeDO> getAll() throws SQLException {
+        List<EmployeeDO> employees = new ArrayList<>();
+        String query = "SELECT id, supervisor_id FROM employee";
+
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                employees.add(new EmployeeDO(resultSet.getInt("id"), resultSet.getInt("supervisor_id")));
+            }
+        } catch (SQLException e) {
+            System.err.println("SQL error: " + e.getSQLState());
+            throw e;
+        }
+
+        return employees;
     }
 
 }

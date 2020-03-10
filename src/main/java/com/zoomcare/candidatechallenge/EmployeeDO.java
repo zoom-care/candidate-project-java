@@ -27,14 +27,14 @@ public class EmployeeDO {
      * @return Employee ID
      */
     public int getId() {
-        return id;
+        return this.id;
     }
 
     /**
      * @return Supervisor ID
      */
     public int getSupervisorId() {
-        return supervisorId;
+        return this.supervisorId;
     }
 
     // Mutators

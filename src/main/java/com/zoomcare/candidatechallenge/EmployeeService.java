@@ -13,10 +13,16 @@ public class EmployeeService {
         this.repository = repository;
     }
 
+    /**
+     * @return Employee with the given ID
+     */
     public Employee get(int id) throws Exception {
         return EmployeeMapper.map(repository.get(id));
     }
 
+    /**
+     * @return All employees who report to the given supervisor
+     */
     public List<Employee> getBySupervisor(int supervisorId) throws Exception {
         return EmployeeMapper.map(repository.getBySupervisor(supervisorId));
     }
@@ -24,11 +30,7 @@ public class EmployeeService {
     /**
      * @return All employees in the database
      */
-    public List<Employee> getAll() {
-        // TODO Auto-generated method stub
-        return null;
-        /*final List<Employee> employees = new ArrayList<>();
-        repository.getAll().forEach(employee -> employees.add(employee));
-        return employees;*/
+    public List<Employee> getAll() throws Exception {
+        return EmployeeMapper.map(repository.getAll());
     }
 }
