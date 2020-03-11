@@ -13,6 +13,7 @@ Things left to work on
 The endpoint /EMPLOYEE was created to serve as an RESTFUL API interface, which serves JSON objects.  Ideally another service would be created with a front end (maybe NodeJS/React stack) which would query this API.
 
 ##Example use cases
+
 http://localhost:8080/EMPLOYEE 
 This returns the top level employees.  In this case it is only the CEO.
 
