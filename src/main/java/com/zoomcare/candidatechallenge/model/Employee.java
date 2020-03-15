@@ -1,6 +1,5 @@
 package com.zoomcare.candidatechallenge.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,7 +7,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -25,8 +23,8 @@ public class Employee implements Serializable
     private Employee supervisor;
 
     @OneToMany(mappedBy = "supervisor")
-    private Set<Employee> employees;
+    private List<Employee> employees;
 
     @OneToMany(mappedBy = "employee")
-    private Set<Property> properties;
+    private List<Property> properties;
 }
