@@ -18,7 +18,7 @@ public class Employee implements Serializable
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SUPERVISOR_ID")
     private Employee supervisor;
 
