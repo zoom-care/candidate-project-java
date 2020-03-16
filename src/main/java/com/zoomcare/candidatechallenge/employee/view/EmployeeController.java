@@ -6,6 +6,7 @@ import com.zoomcare.candidatechallenge.employee.business.Property;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
@@ -20,15 +21,15 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/Employee")
-    public List<EmployeeViewModel> employees() {
+    @GetMapping(produces = "application/json", path = "/employee")
+    public @ResponseBody List<EmployeeViewModel> employees() {
         return employeeService.getEmployees()
                 .stream()
                 .map(this::ConvertEmployeeToEmployeeViewModel)
                 .collect(Collectors.toList());
     }
-    @GetMapping("/Employee/{id}")
-    public EmployeeViewModel employee(@PathVariable("id") Long employeeId) {
+    @GetMapping(produces = "application/json", path = "/employee/{id}")
+    public @ResponseBody EmployeeViewModel employee(@PathVariable("id") Long employeeId) {
         return employeeService.getEmployee(employeeId)
                 .map(this::ConvertEmployeeToEmployeeViewModel)
                 .orElseThrow(EmployeeNotFoundException::new);

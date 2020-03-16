@@ -1,8 +1,8 @@
 package com.zoomcare.candidatechallenge.employee.business;
 
 import com.zoomcare.candidatechallenge.employee.dataaccess.EmployeeDAO;
-import com.zoomcare.candidatechallenge.employee.dataaccess.IEmployeeRepository;
-import com.zoomcare.candidatechallenge.employee.dataaccess.IPropertyRepository;
+import com.zoomcare.candidatechallenge.employee.dataaccess.EmployeeRepository;
+import com.zoomcare.candidatechallenge.employee.dataaccess.PropertyRepository;
 import com.zoomcare.candidatechallenge.employee.dataaccess.PropertyDAO;
 import org.springframework.stereotype.Component;
 
@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 @Component
 public class EmployeeService {
 
-    private final IEmployeeRepository employeeRepository;
-    private final IPropertyRepository propertyRepository;
+    private final EmployeeRepository employeeRepository;
+    private final PropertyRepository propertyRepository;
 
-    public EmployeeService(IEmployeeRepository employeeRepository, IPropertyRepository propertyRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository, PropertyRepository propertyRepository) {
         this.employeeRepository = employeeRepository;
         this.propertyRepository = propertyRepository;
     }
@@ -31,7 +31,7 @@ public class EmployeeService {
 
     public Optional<Employee> getEmployee(Long id) {
         return employeeRepository
-                .findById(id)
+                .getBy(id)
                 .map(this::convertEmployeeDAOToEmployee);
     }
 
