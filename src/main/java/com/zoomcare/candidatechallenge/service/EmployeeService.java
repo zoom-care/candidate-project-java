@@ -57,14 +57,14 @@ public class EmployeeService {
         employeeDao.createBaseEmployeeEntity(employeeId, employeeMap);
 
         // Add the direct-reports for the employeeId
-        employeeDao.getDirectReportListForSupervisorId(employeeId, employeeMap);
+        employeeDao.assignDirectReportListForSupervisorId(employeeId, employeeMap);
 
         // Add the employee properties to the given employee and each of the direct report employees.
         propertyDao.addPropertiesToEmployee(employeeMap);
 
         // return a string representation of the employee and direct-reports in JSON.
         try {
-            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(employeeMap.get(employeeId));
+            return objectMapper.writeValueAsString(employeeMap.get(employeeId));
         } catch (JsonProcessingException e) {
             logger.error("Failed to create output for employee {}", employeeId, e);
             throw new EmployeeProcessingException(
@@ -94,7 +94,7 @@ public class EmployeeService {
 
         // Create the list of all top-level employees and their direct reports.   This will return a list
         // of those employees with a null supervisor id value.
-        List<Long> nullSupervisorIdList = employeeDao.getDirectReportListForNull(employeeMap);
+        List<Long> nullSupervisorIdList = employeeDao.assignDirectReportListForNull(employeeMap);
 
         // Add the employee properties to the top-level employee(s) and each of the direct report employees.
         propertyDao.addPropertiesToEmployee(employeeMap);
@@ -108,7 +108,7 @@ public class EmployeeService {
         // Create a JSON String that represents the list of top-level employees and their direct reports, displayed
         // in a deeply nested structure.
         try {
-            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(nullSupervisorEmployeeList);
+            return objectMapper.writeValueAsString(nullSupervisorEmployeeList);
         } catch (JsonProcessingException e) {
             logger.error(Constants.UNABLE_TO_CREATE_RESPONSE_ALL);
             throw new EmployeeProcessingException(

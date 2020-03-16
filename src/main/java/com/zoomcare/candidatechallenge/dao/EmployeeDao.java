@@ -42,7 +42,7 @@ public class EmployeeDao {
      * @return The list of Employees that have a 'null' value for supervisor.  These are defined as top-level employees.
      * @throws EmployeeProcessingException if gathering the employees fails.
      */
-    public List<Long> getDirectReportListForNull(Map<Long, Employee> idEmployeeMap) throws EmployeeProcessingException {
+    public List<Long> assignDirectReportListForNull(Map<Long, Employee> idEmployeeMap) throws EmployeeProcessingException {
         logger.debug("Enter getDirectReportListForNull");
 
         try {
@@ -54,15 +54,11 @@ public class EmployeeDao {
                             List<Long> nullSupervisors = new ArrayList<>();
                             while (rs.next()) {
                                 Long id = rs.getLong(ID);
-                                Long supervisorId = rs.getLong(SUPERVISOR_ID);
-
-                                // ensure supervisor_id remains null for top-level
-                                supervisorId = supervisorId == 0 ? null : supervisorId;
+                                Long supervisorId = (Long) rs.getObject(SUPERVISOR_ID);
 
                                 // create employee and add to the employee map
                                 Employee employee = new Employee(id, supervisorId);
                                 idEmployeeMap.put(employee.getId(), employee);
-
                                 if (null == supervisorId) {
                                     // we will return the list of top-level employees
                                     nullSupervisors.add(employee.getId());
@@ -95,7 +91,7 @@ public class EmployeeDao {
      *                      will put employee objects into the map based on the results of the query.
      * @throws EmployeeProcessingException if gathering employees fails.
      */
-    public void getDirectReportListForSupervisorId(Long employeeId, Map<Long, Employee> idEmployeeMap)
+    public void assignDirectReportListForSupervisorId(Long employeeId, Map<Long, Employee> idEmployeeMap)
             throws EmployeeProcessingException {
         logger.debug("Enter getDirectReportListForSupervisorId for employeeId {}", employeeId);
 
@@ -135,7 +131,7 @@ public class EmployeeDao {
      *                      will put employee objects into the map based on the results of the query.
      * @throws EmployeeNotFoundException if processing employee fails
      */
-    public void createBaseEmployeeEntity(Long employeeId, HashMap<Long, Employee> idEmployeeMap) throws EmployeeNotFoundException {
+    public void createBaseEmployeeEntity(Long employeeId, Map<Long, Employee> idEmployeeMap) throws EmployeeNotFoundException {
         logger.debug("Enter createBaseEmployeeEntity for employee ID {}", employeeId);
 
         Employee employee = null;
@@ -150,10 +146,7 @@ public class EmployeeDao {
                             Employee employeeResult = null;
                             rs.last();
                             Long id = rs.getLong(ID);
-                            Long supervisorId = rs.getLong(SUPERVISOR_ID);
-
-                            // if this is a top-level employee, keep their supervisor id as null.
-                            supervisorId = supervisorId == 0 ? null : supervisorId;
+                            Long supervisorId = (Long) rs.getObject(SUPERVISOR_ID);
                             employeeResult = new Employee(id, supervisorId);
                             return employeeResult;
                         }

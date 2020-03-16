@@ -1,0 +1,72 @@
+
+OVERVIEW
+--------
+This represents the submission of the Zoom+Care Candidate Code Challenge by John Leinaweaver.
+
+This project fulfills the requirement for two endpoints that provide a list of all
+top-level employees or a specific employee.   The two endpoints are:
+
+For top-level employees:
+GET http://localhost:8080/employee
+
+For an individual employee, queried by the employee's id (represented as "{id}":
+GET http://localhost:8080/employee/{id}
+
+Each employee, whether in the top level list, or an individual employee, includes the
+employee's id, the employee's supervisor id, all the properties associated with the employee,
+and a nested list of all direct reports for that employee.   This will create a deeply nested
+structure of the organization.
+
+
+STRUCTURE
+---------
+This project is organized into sub-packages representing functional areas, all under the
+package name com.zoomcare.candidatechallenge.
+
+config - contains the Bean and Constants definition.
+controller - contains the REST Controller.
+dao - contains the data access objects for the employee and property tables.
+exception - contains exception classes.
+model - contains the pojo representation for each employee and the employee's properties.
+service - contains the code that drives the process from request response.
+
+The main class for the project is CandidateChallengeApplication.
+
+There is also a 'test' subdirectory under the src directory which contains junit
+based unit tests.
+
+
+DESIGN APPROACH
+---------------
+One decision this challenge presents is the approach to gather each employee's data from
+the database and build up the nested structure of direct-reports.  Two approaches comes
+to mind.
+
+Approach #1 For each request, have the project's Java code gather an employee database
+table record, one query at a time.  Then query the database's property table for each
+employee to gather each employee's properties.
+
+Approach #2 Minimize the number of database calls per request using more advanced features
+of SQL.  Here the goal is to make the network calls between the application and
+server consistent regardless of the number of employees to process.
+
+When the number of employees grows to the thousands, and properties per employee grow,
+Approach #1 would require thousands of queries to the database for each REST request.
+This is one per each employee and one per employee's properties.  The volume of traffic
+between the application and database server will greatly slow the application as the
+number of employees and properties grows.  Especially in the case where there could be
+dozens of incoming REST API calls to the application at the same time.
+
+This submission uses Approach #2.
+
+This submission will require only 3 queries for a specific employee endpoint and
+only 2 queries when the top-level endpoint is called.  This is true regardless of
+the number of employees and number of properties per employee.  This minimizes the
+network traffic between the application and database, improving the performance as the
+database tables grow.
+
+This submission utilizes recursive SQL to minimize the number of database calls when
+gathering/building the direct-report structure.  Gathering the properties for all the
+employees is also minimized to a single query, regardless of the number of employees
+and properties.
+

@@ -36,7 +36,6 @@ public class PropertyDao {
         logger.debug("Enter addPropertiesToEmployee");
 
         try {
-
             // get the list of employee IDs that will be used in the query
             List<Long> ids = Arrays.asList(idEmployeeMap.keySet().toArray(new Long[idEmployeeMap.size()]));
 
