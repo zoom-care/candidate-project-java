@@ -22,9 +22,9 @@ public class Employee implements Serializable
     @JoinColumn(name = "SUPERVISOR_ID")
     private Employee supervisor;
 
-    @OneToMany(mappedBy = "supervisor")
+    @OneToMany(mappedBy = "supervisor", fetch = FetchType.LAZY)
     private List<Employee> employees;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     private List<Property> properties;
 }

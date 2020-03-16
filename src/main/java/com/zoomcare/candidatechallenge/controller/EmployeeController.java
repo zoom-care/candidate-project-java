@@ -1,12 +1,8 @@
 package com.zoomcare.candidatechallenge.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zoomcare.candidatechallenge.exception.NotFoundException;
 import com.zoomcare.candidatechallenge.model.Employee;
 import com.zoomcare.candidatechallenge.model.dto.EmployeeDTO;
-import com.zoomcare.candidatechallenge.model.dto.Node;
-import com.zoomcare.candidatechallenge.model.dto.PropertyDTO;
 import com.zoomcare.candidatechallenge.repository.EmployeeRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -46,7 +42,9 @@ public class EmployeeController
     public ResponseEntity<List<EmployeeDTO>> findAllTopLevelEmployees() {
         final ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-        final List<Employee> allTopLevelEmployees = employeeRepository.findAllTopLevelEmployees();
+//        final List<Employee> supervisors = employeeRepository.fetchAllTopSupervisors();
+//        final List<Employee> allTopLevelEmployees = employeeRepository.fetchAllTopWithProperties(supervisors);
+        final List<Employee> allTopLevelEmployees = employeeRepository.findAllBySupervisorIsNull();
         final List<EmployeeDTO> employeeDTOs = allTopLevelEmployees.stream()
             .map(employee -> modelMapper.map(employee, EmployeeDTO.class))
             .collect(Collectors.toList());
