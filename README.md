@@ -2,6 +2,10 @@
 
 ![ZOOM+Care Logo](https://avatars0.githubusercontent.com/u/48925141?s=150)
 
+Service Endpoints:<br>
+`/api/employees/{id}`<br>
+`/api/employees/top-level`
+
 Welcome to the ZOOM+Care Java Web Service Candidate Code Challenge. If you are here you most likely have interest in joining the ZOOM+Care Software Engineering Team and asked to choose one of our software development challenges. If you came here on your own, you are welcome to explore the challenge and use it to sharpen your skills or prepare for future interviews.
 
 The ZOOM+Care Candidate Code Challenges are intended to take between 1 and 2 hours to complete. This is not intended to be an extensive test of your programing skills or knowledge, but rather as a starting point for further conversations during the application process.
