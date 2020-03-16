@@ -48,8 +48,8 @@ public class EmployeeController
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         final List<Employee> allTopLevelEmployees = employeeRepository.findAllTopLevelEmployees();
         final List<EmployeeDTO> employeeDTOs = allTopLevelEmployees.stream()
-                .map(employee -> modelMapper.map(employee, EmployeeDTO.class))
-                .collect(Collectors.toList());
+            .map(employee -> modelMapper.map(employee, EmployeeDTO.class))
+            .collect(Collectors.toList());
 
         return ResponseEntity.ok(employeeDTOs);
     }
