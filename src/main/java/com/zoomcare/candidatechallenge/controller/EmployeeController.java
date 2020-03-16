@@ -2,6 +2,7 @@ package com.zoomcare.candidatechallenge.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zoomcare.candidatechallenge.exception.NotFoundException;
 import com.zoomcare.candidatechallenge.model.Employee;
 import com.zoomcare.candidatechallenge.model.dto.EmployeeDTO;
 import com.zoomcare.candidatechallenge.model.dto.Node;
@@ -38,7 +39,7 @@ public class EmployeeController
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
             return ResponseEntity.ok(modelMapper.map(employee.get(), EmployeeDTO.class));
         }
-        return ResponseEntity.notFound().build();
+        throw new NotFoundException("Employee NOT FOUND | ID: " + id);
     }
 
     @GetMapping("/employees/top-level")

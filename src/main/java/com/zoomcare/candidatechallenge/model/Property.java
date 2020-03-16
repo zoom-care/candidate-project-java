@@ -20,7 +20,7 @@ public class Property implements Serializable
     private String value;
 
     @MapsId("employeeId")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private Employee employee;
 }
