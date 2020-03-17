@@ -39,25 +39,7 @@ based unit tests.
 DESIGN APPROACH
 ---------------
 One decision this challenge presents is the approach to gather each employee's data from
-the database and build up the nested structure of direct-reports.  Two approaches comes
-to mind.
-
-Approach #1 For each request, have the project's Java code gather an employee database
-table record, one query at a time.  Then query the database's property table for each
-employee to gather each employee's properties.
-
-Approach #2 Minimize the number of database calls per request using more advanced features
-of SQL.  Here the goal is to make the network calls between the application and
-server consistent regardless of the number of employees to process.
-
-When the number of employees grows to the thousands, and properties per employee grow,
-Approach #1 would require thousands of queries to the database for each REST request.
-This is one per each employee and one per employee's properties.  The volume of traffic
-between the application and database server will greatly slow the application as the
-number of employees and properties grows.  Especially in the case where there could be
-dozens of incoming REST API calls to the application at the same time.
-
-This submission uses Approach #2.
+the database and build up the nested structure of direct-reports.
 
 This submission will require only 3 queries for a specific employee endpoint and
 only 2 queries when the top-level endpoint is called.  This is true regardless of
