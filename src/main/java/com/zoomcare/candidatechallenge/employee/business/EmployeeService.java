@@ -31,7 +31,7 @@ public class EmployeeService {
 
     public Optional<Employee> getEmployee(Long id) {
         return employeeRepository
-                .getBy(id)
+                .getById(id)
                 .map(this::convertEmployeeDAOToEmployee);
     }
 

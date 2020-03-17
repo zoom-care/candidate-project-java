@@ -20,7 +20,7 @@ public class EmployeeRepository {
     public List<EmployeeDAO> getAllBySupervisorId(Long supervisorId){
         return jdbcTemplate.query("SELECT ID, SUPERVISOR_ID FROM EMPLOYEE WHERE SUPERVISOR_ID = ?", new Long[] {supervisorId}, (rs, rownum) -> convertRecordToEmployeeDao(rs));
     }
-    public Optional<EmployeeDAO> getBy(Long id) {
+    public Optional<EmployeeDAO> getById(Long id) {
         return jdbcTemplate.query("SELECT ID, SUPERVISOR_ID FROM EMPLOYEE WHERE SUPERVISOR_ID = ?", new Long[] {id}, (rs, rownum) -> convertRecordToEmployeeDao(rs)).stream().findFirst();
     }
     public List<EmployeeDAO> getAllBySupervisorIdNull(){

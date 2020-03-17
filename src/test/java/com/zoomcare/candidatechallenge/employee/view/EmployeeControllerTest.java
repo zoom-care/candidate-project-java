@@ -4,11 +4,10 @@ import com.zoomcare.candidatechallenge.employee.business.Employee;
 import com.zoomcare.candidatechallenge.employee.business.EmployeeService;
 import com.zoomcare.candidatechallenge.employee.business.Property;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,17 +15,14 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 
-
+@RunWith(MockitoJUnitRunner.class)
 public class EmployeeControllerTest {
 
     @Mock
     EmployeeService employeeServiceMock;
 
-    @Rule
-    public MockitoRule mockitoRule = MockitoJUnit.rule();
-
     @Test
-    public void employees() {
+    public void getEmployees() {
         Employee employee1 = Employee.builder()
                 .id(1L)
                 .directReports(new ArrayList<>())
@@ -46,7 +42,7 @@ public class EmployeeControllerTest {
         Assert.assertEquals(expectedFirstId, results.stream().findFirst().map(EmployeeViewModel::getId).orElse(0L));
     }
     @Test
-    public void employee1() {
+    public void getSingleEmployee() {
         Property property1Employee2 = Property.builder()
                 .employeeId(2L)
                 .key("-test-key-2-")
