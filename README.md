@@ -49,3 +49,10 @@ A map of key/value pairs of properties assigned to an employee.
 1. Create a Fork of the repository into your personal GitHub space.
 2. Implement the feature as described above.
 3. Create a Pull Request back to the original project.
+
+## Service Employee Endpoints
+Return all top level users:  [http://localhost:8080/employee](http://localhost:8080/employee)
+Return specific user with id 1 (change the id if you want other users):  [http://localhost:8080/employee/1](http://localhost:8080/employee/1) 
+
+## Mutation Testing
+To run mutation test run `./mvnw  org.pitest:pitest-maven:mutationCoverage`.
