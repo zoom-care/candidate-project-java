@@ -88,6 +88,11 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>1.5.0</version>
+			</plugin>
 		</plugins>
 	</build>
 
