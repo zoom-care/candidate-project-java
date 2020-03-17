@@ -6,6 +6,14 @@ Welcome to the ZOOM+Care Java Web Service Candidate Code Challenge. If you are h
 
 The ZOOM+Care Candidate Code Challenges are intended to take between 1 and 2 hours to complete. This is not intended to be an extensive test of your programing skills or knowledge, but rather as a starting point for further conversations during the application process.
 
+## Known issues
+- This dataset is clearly better suited for a NoSQL database, such as Mongo.
+- Program iterates over entire set when looking at one or all, this is a result of time constraints on my part.
+## Endpoints
+/employees
+
+/employees/{id}
+
 ## Instructions
 This Candidate Code Challenge is geared specifically toward developers with java and web service experience. The objective of this challenge is to start with this very basic project, which includes a database with employee data, to expose the supplied data in web service endpoints.
 
