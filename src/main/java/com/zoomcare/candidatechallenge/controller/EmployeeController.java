@@ -14,11 +14,11 @@ public class EmployeeController {
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET, produces = "application/json")
     public String employees() {
-        return employeeService.getAllEmployees();
+        return employeeService.getEmployees(false, 0);
     }
 
     @RequestMapping(value = "employees/{id}", method = RequestMethod.GET, produces = "application/json")
     public String findEmployeeById(@PathVariable Integer id) {
-        return employeeService.findEmployeeById(id);
+        return employeeService.getEmployees(true, id);
     }
 }
