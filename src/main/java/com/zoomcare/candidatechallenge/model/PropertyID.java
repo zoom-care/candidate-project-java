@@ -6,7 +6,9 @@ import java.io.Serializable;
 import java.math.BigInteger;
 
 @Data
-public class PropertyID implements Serializable {
-    private BigInteger employeeID;
+public class PropertyId implements Serializable {
+
+    private BigInteger employeeId;
     private String key;
+
 }

@@ -7,6 +7,11 @@ import java.math.BigInteger;
 import java.util.List;
 
 public interface EmployeeRepository extends JpaRepository<Employee, BigInteger> {
-    List<Employee> findEmployeesBysupervisorID(BigInteger employeeID);
+
+    List<Employee> findEmployeesBySupervisorId(BigInteger employeeId);
+
+    List<Employee> findEmployeesBySupervisorIdIsNull();
+
+    Employee findEmployeesById(BigInteger employeeId);
 
 }

@@ -14,46 +14,37 @@ import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
+
     private final EmployeeRepository employeeRepository;
     private final PropertyRepository propertyRepository;
 
     public EmployeeService(EmployeeRepository employeeRepository, PropertyRepository propertyRepository) {
         this.employeeRepository = employeeRepository;
         this.propertyRepository = propertyRepository;
-//        this.employeeService = employeeService;
     }
 
-    public List<EmployeeDTO> getAllEmployees() {
+    public List<EmployeeDTO> getTopLevelEmployees() {
         return employeeRepository
-                .findAll()
+                .findEmployeesBySupervisorIdIsNull()
                 .stream()
                 .map(this::convertToEmployeeDTO)
                 .collect(Collectors.toList());
     }
 
+    public EmployeeDTO getEmployeeById(BigInteger employeeId) {
+        Employee employee = employeeRepository.findEmployeesById(employeeId);
+        return convertToEmployeeDTO(employee);
+    }
+
     private EmployeeDTO convertToEmployeeDTO(Employee employee) {
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setId(employee.getId());
-        employeeDTO.setSupervisorId(employee.getSupervisorID());
+        employeeDTO.setSupervisorId(employee.getSupervisorId());
         employeeDTO.setProperties(employee.getProperties().stream().map(this::convertToEmployeePropertyDTO).collect(Collectors.toList()));
-        employeeDTO.setDirectReports(employeeRepository.findEmployeesBysupervisorID(employee.getId()).stream().map(this::convertToEmployeeDTO).collect(Collectors.toList()));
-//        List<EmployeePropertyDTO> employeePropertyDTOS = getAllEmployeeProperties(employee.getID());
-//        employeeDTO.setDirectReports();
+        employeeDTO.setDirectReports(employeeRepository.findEmployeesBySupervisorId(employee.getId()).stream().map(this::convertToEmployeeDTO).collect(Collectors.toList()));
 
-//        Location location = user.getLocation();
-//        userLocationDTO.setLat(location.getLat());
-//        userLocationDTO.setLng(location.getLng());
-//        userLocationDTO.setPlace(location.getPlace());
         return employeeDTO;
     }
-
-//    public List<EmployeePropertyDTO> getAllEmployeeProperties(BigInteger employeeID) {
-//        return propertyRepository
-//                .findPropertiesByEMPLOYEEID(employeeID)
-//                .stream()
-//                .map(this::convertToEmployeePropertyDTO)
-//                .collect(Collectors.toList());
-//    }
 
     private EmployeePropertyDTO convertToEmployeePropertyDTO(Property property) {
         EmployeePropertyDTO employeePropertyDTO = new EmployeePropertyDTO();
@@ -61,6 +52,7 @@ public class EmployeeService {
         employeePropertyDTO.setValue(property.getValue());
         return employeePropertyDTO;
     }
+
 }
 
 

@@ -6,7 +6,8 @@ import java.math.BigInteger;
 import java.util.List;
 
 @Data
-public class EmployeeDTO{
+public class EmployeeDTO {
+
     private BigInteger id;
     private BigInteger supervisorId;
     private List<EmployeePropertyDTO> properties;
