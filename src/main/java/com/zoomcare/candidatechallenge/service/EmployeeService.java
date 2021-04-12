@@ -8,6 +8,7 @@ import com.zoomcare.candidatechallenge.repository.EmployeeRepository;
 import com.zoomcare.candidatechallenge.repository.PropertyRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,8 +32,11 @@ public class EmployeeService {
                 .collect(Collectors.toList());
     }
 
-    public EmployeeDTO getEmployeeById(BigInteger employeeId) {
+    public EmployeeDTO getEmployeeById(BigInteger employeeId) throws EntityNotFoundException {
         Employee employee = employeeRepository.findEmployeesById(employeeId);
+        if (employee == null) {
+            throw new EntityNotFoundException("No employee found with id " + employeeId + ".");
+        }
         return convertToEmployeeDTO(employee);
     }
 

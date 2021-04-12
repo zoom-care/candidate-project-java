@@ -2,16 +2,15 @@ package com.zoomcare.candidatechallenge.controller;
 
 import com.zoomcare.candidatechallenge.dto.EmployeeDTO;
 import com.zoomcare.candidatechallenge.service.EmployeeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
 import java.util.List;
 
 
 @RestController
+@Validated
 public class EmployeeController {
 
     private final EmployeeService employeeService;
@@ -29,7 +28,10 @@ public class EmployeeController {
 
     @GetMapping(produces = "application/json", path = "/employeebyid/{id}")
     @ResponseBody
-    public EmployeeDTO getEmployeesByID(@PathVariable("id") BigInteger id) {
+    public EmployeeDTO getEmployeesByID(@PathVariable() BigInteger id) {
+            if(id == null) {
+                throw new IllegalArgumentException();
+            }
             EmployeeDTO employee = employeeService.getEmployeeById(id);
             return employee;
     }
