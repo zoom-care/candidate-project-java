@@ -6,6 +6,21 @@ Welcome to the ZOOM+Care Java Web Service Candidate Code Challenge. If you are h
 
 The ZOOM+Care Candidate Code Challenges are intended to take between 1 and 2 hours to complete. This is not intended to be an extensive test of your programing skills or knowledge, but rather as a starting point for further conversations during the application process.
 
+## Implemented API Endpoints
+/toplevelemployees - Returns all top-level employees including their properties and direct reports as a nested list of employees.
+
+/employeebyid/{id} - Returns the employee record for a given employee id including their properties and direct reports as a nested list of employees.
+
+## Code Challenge Discussion
+
+This was my first ever Java project so it was definitely a challenge to quickly get context on the provided platform and identify appropriate patterns for producing a working solution that is readable, maintainable, and protected against runtime errors as the API evolves - e.g. no magic strings.
+
+**Shortcomings: **
+I implemented some very basic exception handling but would have loved to dive farther into that subject to produce a more robust and reusable implementation had time allowed.
+
+Similarly, I would expect to write tests to cover this API implementation but I simply ran out of time.
+
+
 ## Instructions
 This Candidate Code Challenge is geared specifically toward developers with java and web service experience. The objective of this challenge is to start with this very basic project, which includes a database with employee data, to expose the supplied data in web service endpoints.
 
