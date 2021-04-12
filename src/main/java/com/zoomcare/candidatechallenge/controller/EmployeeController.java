@@ -29,9 +29,6 @@ public class EmployeeController {
     @GetMapping(produces = "application/json", path = "/employeebyid/{id}")
     @ResponseBody
     public EmployeeDTO getEmployeesByID(@PathVariable() BigInteger id) {
-            if(id == null) {
-                throw new IllegalArgumentException();
-            }
             EmployeeDTO employee = employeeService.getEmployeeById(id);
             return employee;
     }
