@@ -1,0 +1,10 @@
+*************************************************
+To run the program and see the results:
+
+	- Run program.
+	- In your browser:
+		- http://localhost:8080/employee/{id}
+		- http://localhost:8080/employees
+
+Please refer to "WebController.java" file for the endpoints.
+*************End of instruction******************
