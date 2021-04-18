@@ -40,7 +40,7 @@ public class Employee
 
     @Override
 	public String toString() {
-		return "EmployeeEntry [id=" + id + " supervisor_id=" + supervisor_id + "] \n";
+		return "Employee[id=" + id + " supervisor_id=" + supervisor_id + "] \n";
 	}
 
     public static void main(String[] args)
