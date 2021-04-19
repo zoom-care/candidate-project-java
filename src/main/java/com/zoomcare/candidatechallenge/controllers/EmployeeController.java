@@ -19,7 +19,7 @@ public class EmployeeController {
   @Autowired
   private EmployeeService employeeService;
   
-  @GetMapping("/employee")
+  @GetMapping("/employees")
   public ResponseEntity<List<Employee>> employee(@RequestParam(value = "id", defaultValue = "") String id) {
     // Return a list of a single employee and their direct report hierarchy if an ID was passed in the request
     // Return a list of all supervisors and the full direct report hierarchy if no ID was passed
