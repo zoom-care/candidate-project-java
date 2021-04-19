@@ -12,14 +12,14 @@ public class Employee {
     this.id = id;
     this.properties = properties;
     this.directReports = directReports;
-	}
-
-	public Long getId() {
-		return this.id;
   }
 
-	public Map<String, String> getProperties() {
-		return this.properties;
+  public Long getId() {
+    return this.id;
+  }
+
+  public Map<String, String> getProperties() {
+    return this.properties;
   }
 
   public List<Employee> getDirectReports() {
