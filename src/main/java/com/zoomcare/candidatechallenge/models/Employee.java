@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Employee {
-  private Long id;
-  private Map<String, String> properties;
-  private List<Employee> directReports;
+  private final Long id;
+  private final Map<String, String> properties;
+  private final List<Employee> directReports;
 
   public Employee(Long id, Map<String, String> properties, List<Employee> directReports) {
     this.id = id;

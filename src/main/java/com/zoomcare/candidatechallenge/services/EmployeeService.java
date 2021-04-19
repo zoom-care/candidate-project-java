@@ -26,6 +26,7 @@ public class EmployeeService implements IEmployeeService {
   public List<Employee> getEmployeeById(Long id) {
     List<Employee> employeeTree = new ArrayList<>();
     Employee employee = employeeRepository.getEmployee(id);
+    // If we can't find the employee based on the ID provided, we'll return an empty list
     if (employee == null) {
       return employeeTree;
     }
@@ -36,13 +37,13 @@ public class EmployeeService implements IEmployeeService {
   }
 
   private Employee createEmployeeTree(Employee currentEmployee) {
-    
     List<Employee> directReports = attachPropertiesToEmployees(employeeRepository.getEmployeesBySupervisorId(currentEmployee.getId()));
     if (directReports.size() == 0) {
+      // we've reached the end of this branch, no more direct reports to identify
       return currentEmployee;
     } else {
       for (Employee employee : directReports) {
-        // recursively add expanded employees to create the employee hierarchy
+        // recursively add direct reports to continue creating the employee hierarchy
         currentEmployee.getDirectReports().add(createEmployeeTree(employee));
       }
       return currentEmployee;
@@ -60,17 +61,7 @@ public class EmployeeService implements IEmployeeService {
 
   private Employee attachPropertiesToEmployee(Employee employee, List<Map<String, Object>> properties) {
     for (Map<String, Object> property : properties) {
-      String currentKey = "";
-      String currentValue = "";
-      for (Map.Entry<String, Object> entry : property.entrySet()) {
-        if (entry.getKey().equals("KEY")) {
-          currentKey = (String)entry.getValue();
-        }
-        if (entry.getKey().equals("VALUE")) {
-          currentValue = (String)entry.getValue();
-        }
-      }
-      employee.getProperties().put(currentKey, currentValue);
+      employee.getProperties().put((String)property.get("KEY"), (String)property.get("VALUE"));
     }
     return employee;
   }

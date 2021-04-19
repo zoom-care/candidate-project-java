@@ -3,8 +3,8 @@ package com.zoomcare.candidatechallenge.models;
 import org.springframework.http.HttpStatus;
 
 public class IdInputValidationErrorResponse {
-  private HttpStatus status;
-  private String message;
+  private final HttpStatus status;
+  private final String message;
 
    public IdInputValidationErrorResponse() {
     this.status = HttpStatus.BAD_REQUEST;

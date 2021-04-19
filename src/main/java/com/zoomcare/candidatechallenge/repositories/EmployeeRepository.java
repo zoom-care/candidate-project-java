@@ -22,6 +22,7 @@ public class EmployeeRepository implements IEmployeeRepository {
   private JdbcTemplate jdbcTemplate;
   private final String employeeTableName = "EMPLOYEE";
   private final String propertyTableName = "PROPERTY";
+  private final String selectPrefix = "select * from ";
 
   private static final class EmployeeMapper implements RowMapper<Employee> {
 
@@ -37,18 +38,18 @@ public class EmployeeRepository implements IEmployeeRepository {
   }
 
   public List<Employee> getAllSupervisors() {
-    String query = "select * from " + employeeTableName + " where SUPERVISOR_ID is null";
+    String query = selectPrefix + employeeTableName + " where SUPERVISOR_ID is null";
     return this.jdbcTemplate.query(query, new EmployeeMapper());
   }
 
   public List<Employee> getEmployeesBySupervisorId(Long id) {
-    String query = "select * from " + employeeTableName + " where SUPERVISOR_ID = ?";
+    String query = selectPrefix + employeeTableName + " where SUPERVISOR_ID = ?";
     return this.jdbcTemplate.query(query, new Object[] {id}, new EmployeeMapper());
   }
 
   public Employee getEmployee(Long id) {
     try {
-      String query = "select * from " + employeeTableName + " where ID = ?";
+      String query = selectPrefix + employeeTableName + " where ID = ?";
       return this.jdbcTemplate.queryForObject(query, new Object[] {id}, new EmployeeMapper());
     } catch (EmptyResultDataAccessException ex) {
       return null;
@@ -56,7 +57,7 @@ public class EmployeeRepository implements IEmployeeRepository {
   }
 
   public List<Map<String, Object>> getEmployeeProperties(Long id) {
-    String query = "select * from " + propertyTableName + " where EMPLOYEE_ID = ?";
+    String query = selectPrefix + propertyTableName + " where EMPLOYEE_ID = ?";
     return this.jdbcTemplate.queryForList(query, new Object[] {id});
   }
 }

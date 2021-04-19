@@ -21,6 +21,8 @@ public class EmployeeController {
   
   @GetMapping("/employee")
 	public ResponseEntity<List<Employee>> employee(@RequestParam(value = "id", defaultValue = "") String id) {
+    // Return a list of a single employee and their direct report hierarchy if an ID was passed in the request
+    // Return a list of all supervisors and the full direct report hierarchy if no ID was passed
     List<Employee> employees = new ArrayList<>();
     if (id.equals("")) {
       employees = employeeService.getAllEmployees();
