@@ -15,9 +15,9 @@ import java.sql.Statement;
 /*	Author: Riley Everett
 	Date: 4/18/2021
 	Description: This file contains an implementation of the ZoomCare Candidate Challenge project. The project includes
-	a class that acts as a Rest Controller answering requests sent to specific local:8080 addresses. the project
+	a class that acts as a Rest Controller answering requests sent to specific local:8080 addresses. The project
 	includes a SQL database containing information about employees and a table linking employees to their supervisors.
-	the two main features of this application are to display a nested list of all employees and their direct reports
+	The two main features of this application are to display a nested list of all employees and their direct reports
 	and to search for an employee by ID number and display their reports as well. When the server is running the list
 	of all employees endpoint is exposed at the address local:8080/orgChart and the search endpoint is exposed
 	at local:8080/employeeSearch. The employee search takes an employee_id value that defaults to 1 (the CEO) but can
@@ -31,7 +31,7 @@ import java.sql.Statement;
 public class CandidateChallengeApplication
 {
 
-	// Method that processes and answers request sent to the /employeeSearch extension
+	// Method that processes and answers requests sent to the /employeeSearch extension
 	// employee_id can be selected by including the ?employee_id=n where n is and integer to the end of the address
 	// otherwise the value is defaulted to 1 (the CEO)
 	@GetMapping("employeeSearch")
@@ -42,7 +42,7 @@ public class CandidateChallengeApplication
 
 		// get the details of the employee being searched for and store them in a StringBuilder
 		StringBuilder sb = getEmployeeDetails(connection, employee_id);
-		// get the details of any direct reports the employee has and add them to a StringBuilder
+		// get the details of any direct reports the employee has and add them to the StringBuilder
 		sb = getDirectReports(connection, employee_id, sb, 1);
 
 		// close connection to database
@@ -140,7 +140,7 @@ public class CandidateChallengeApplication
 					if (properties.getString("key").equalsIgnoreCase("region")) {
 						regionStr = properties.getString("value");
 					}
-					// add employees title to the string builder if the row contains that data
+					// add employee's title to the string builder if the row contains that data
 					if (properties.getString("key").equalsIgnoreCase("title")) {
 						sb.append(properties.getString("value"));
 					}
