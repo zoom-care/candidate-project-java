@@ -41,7 +41,7 @@ public class Properties
 
     @Override
 	public String toString() {
-		return "Properties [employee_id=" + employee_id + " key=" + key + " value=" + value + "] \n";
+		return " Properties [employee_id=" + employee_id + " key=" + key + " value=" + value + "] \n";
 	}
 
     public static void main(String[] args)
