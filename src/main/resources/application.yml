@@ -2,6 +2,17 @@ spring:
   h2:
     console:
       enabled: true
+  datasource:
+    url: "jdbc:h2:~/test;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE"
+#    initialization-mode: always
+  flyway:
+    baseline-on-migrate: true
+  jpa:
+    hibernate:
+      ddl-auto: none
+      format_sql: true
+  main:
+    allow-bean-definition-overriding: true
 management:
   endpoints:
     web:
