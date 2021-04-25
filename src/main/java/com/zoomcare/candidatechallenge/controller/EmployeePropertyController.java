@@ -74,6 +74,16 @@ public class EmployeePropertyController {
   public Employee findEmployee(@PathVariable Long employeeId) {
     Employee employee = employeeService.getById(employeeId);
     employee.setProperties(propertyService.getById(employeeId));
+    List<Employee> directReports = employeeService.getDirectReports(employeeId);
+    
+    // Add all the reports to directReportIds
+    ArrayList<Long> directReportIds = new ArrayList<Long>();
+    for (Employee employeeReport: directReports) {
+    	directReportIds.add(employeeReport.getId());
+    }
+    
+    employee.setDirectReports(directReportIds);
+    
     return employee;
   }
   

@@ -32,4 +32,12 @@ public class EmployeeService {
         return jtm.queryForObject(sql, new Object[]{id},
                 new BeanPropertyRowMapper<>(Employee.class));
     }
+    
+    /*
+     * Gets the direct reports for the employee
+     */
+    public List<Employee> getDirectReports(Long id) {
+    	String sql = "SELECT * FROM employee WHERE supervisor_id = " + id.toString();
+        return jtm.query(sql, new BeanPropertyRowMapper<>(Employee.class));
+    }
 }
