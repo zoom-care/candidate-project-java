@@ -1,11 +1,13 @@
 package com.zoomcare.candidatechallenge.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -20,6 +22,9 @@ public class Employee {
 	@OneToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name="employee_id")
 	private List<Property> properties;
+	
+	@Transient
+	private List<Long> directReports;
 
 	public Employee() {
 	}
@@ -67,5 +72,13 @@ public class Employee {
 
 	public void setProperties(List<Property> properties) {
 		this.properties = properties;
+	}
+
+	public List<Long> getDirectReports() {
+		return directReports;
+	}
+
+	public void setDirectReports(List<Long> directReports) {
+		this.directReports = directReports;
 	}
 }
