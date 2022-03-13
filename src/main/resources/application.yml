@@ -2,6 +2,17 @@ spring:
   h2:
     console:
       enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
 management:
   endpoints:
     web:
