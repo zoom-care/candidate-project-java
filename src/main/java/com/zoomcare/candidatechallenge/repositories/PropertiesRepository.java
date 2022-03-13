@@ -10,10 +10,6 @@ import com.zoomcare.candidatechallenge.objects.Properties;
 
 public class PropertiesRepository implements CommonRepository {
     
-    public PropertiesRepository() {
-
-    }
-
     public List<Properties> getListOfPropertiesById(int id) {
 
         List<Properties> properties = new ArrayList<>();
