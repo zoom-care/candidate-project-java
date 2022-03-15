@@ -20,12 +20,6 @@ public class EmployeesInfoController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping("/hello")
-    //@RequestMapping(value="/hello", method= RequestMethod.GET)
-    public String helloWorld(){
-        return "Hello World !!";
-    }
-
     @GetMapping("/get")
     public ResponseEntity<List<Employee>> getEmployee(){
         List<Employee> list = employeeService.findAll();
