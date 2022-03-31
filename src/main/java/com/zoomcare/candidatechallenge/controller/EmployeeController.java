@@ -15,12 +15,12 @@ public class EmployeeController {
     @Autowired
     private EmployeePropertiesService employeePropertiesService;
 
-    @GetMapping("/topEmployees")
+    @GetMapping("zoomcare/topemployees")
     Iterable<EmployeePropertiesDTO> getTopEmployees() {
         return employeePropertiesService.getTopEmployees();
     }
 
-    @GetMapping("/employees/{id}")
+    @GetMapping("zoomcare/employees/{id}")
     EmployeePropertiesDTO findEmployee(@PathVariable BigInteger id) {
         return employeePropertiesService.getEmployeeById(id);
     }
