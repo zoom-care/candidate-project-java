@@ -20,15 +20,12 @@ public class EmployeePropertiesService {
     private EmployeeRepository employeeRepository;
 
     public List<EmployeePropertiesDTO> getTopEmployees(){
-        List <EmployeePropertiesDTO> topEmployees = employeeRepository.getTopEmployees().stream().
-                map(this::convertData).collect(Collectors.toList());
-
-        return topEmployees;
+        return (employeeRepository.getTopEmployees().stream().
+                map(this::convertData).collect(Collectors.toList()));
     }
 
     public EmployeePropertiesDTO getEmployeeById(BigInteger id) {
-        EmployeePropertiesDTO employee = convertData(employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException("Employee not found")));
-        return employee;
+        return (convertData(employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException("Employee not found"))));
     }
 
     private EmployeePropertiesDTO convertData(Employee employee){

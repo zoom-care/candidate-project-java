@@ -1,8 +1,8 @@
 ###
-GET http://localhost:8080/zoomcare/topEmployees
+GET http://localhost:8080/zoomcare/topemployees
 
 ###
-GET http://localhost:8080/employees/7
+GET http://localhost:8080/employees/9
 
 ###
 GET http://localhost:8080/employees/1
