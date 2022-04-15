@@ -1,6 +1,7 @@
 package com.zoomcare.candidatechallenge.models.services;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,16 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		});
 
 		return returnList;
+	}	
+	
+	@Transactional(readOnly = true)
+	public HashMap<Optional<Employee>, List<Property>> findProperties(Long id) {
+		Optional<Employee> employee = employeeDao.findById(id);
+		List<Property> properties = (List<Property>) propertyDao.findByEmployeeId(id);
+		HashMap<Optional<Employee>, List<Property>> returnMap = null;
+		returnMap.put(employee, properties);
+
+		return returnMap;
 	}	
 
 	@Override

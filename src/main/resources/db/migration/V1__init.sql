@@ -7,8 +7,8 @@ create table employee (
 
 create table property (
   employee_id bigint(20) not null,
-  key varchar(256),
+  id varchar(256),
   value varchar(256),
-  primary key (employee_id, key),
+  primary key (employee_id, id),
   foreign key (employee_id) references employee(id)
-);
+);\

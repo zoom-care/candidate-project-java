@@ -14,12 +14,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="employee")
+@Table(name="property")
 public class Property implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private String key;
+	private String id;
 
 	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id")
@@ -34,11 +34,11 @@ public class Property implements Serializable {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-	public String getKey() {
-		return key;
+	public String getId() {
+		return id;
 	}
-	public void setKey(String key) {
-		this.key = key;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getValue() {
 		return value;

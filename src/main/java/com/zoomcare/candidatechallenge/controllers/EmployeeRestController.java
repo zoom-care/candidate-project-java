@@ -3,6 +3,8 @@ package com.zoomcare.candidatechallenge.controllers;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -35,6 +37,11 @@ public class EmployeeRestController {
 		return employeeService.findAllWithProperties();
 	}
 	
+	@PutMapping("/employees/employee/{id}")
+	public HashMap<Optional<Employee>, List<Property>> getWithProperties(@PathVariable Long id){
+	
+		return employeeService.findProperties(id);
+	}
 	
 	@GetMapping("/employees/employee")
 	public Employee show(@RequestParam Long id){
