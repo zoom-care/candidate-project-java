@@ -20,9 +20,7 @@ public class EmployeeRepo {
 
     public List<Employee> getEmployees() {
         String sql = "SELECT * FROM employee";
-        List<Employee> employees = jdbcTemplate.query(sql, new EmployeeRowMapper());
-        System.out.println(employees);
-        return employees;
+        return jdbcTemplate.query(sql, new EmployeeRowMapper());
     }
 
 }
