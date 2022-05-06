@@ -2,6 +2,10 @@ spring:
   h2:
     console:
       enabled: true
+  datasource:
+    jdbcUrl: jdbc:h2:mem:testdb
+    username: sa
+    password:
 management:
   endpoints:
     web:
