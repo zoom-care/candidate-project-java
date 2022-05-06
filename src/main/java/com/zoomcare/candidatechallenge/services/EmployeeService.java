@@ -28,6 +28,7 @@ public class EmployeeService {
         if (!employeeOpt.isPresent()) throw new Exception("No existe un empleado con ese identificador"); // TODO: Custom exception
         List<Employee> employeeList = employeeRepo.getEmployees();
         EmployeeDto employeeDto = new EmployeeDto();
+        employeeDto.setEmployeeId(id);
         employeeDto.setProperties(employeeRepo.getEmployeeProperties(id));
         employeeDto.setSubEmployees(getSubEmployees(id, employeeList));
         return employeeDto;
@@ -39,11 +40,21 @@ public class EmployeeService {
         List<EmployeeDto> subEmployeesDto = new ArrayList<>();
         for (Employee employee : subEmployees) {
             EmployeeDto sub = new EmployeeDto();
+            sub.setEmployeeId(employee.getEmployeeId());
             sub.setProperties(employeeRepo.getEmployeeProperties(employee.getEmployeeId()));
             sub.setSubEmployees(getSubEmployees(employee.getEmployeeId(), employeeList));
             subEmployeesDto.add(sub);
         }
         return subEmployeesDto;
+    }
+
+    public List<EmployeeDto> getTopLevelEmployees() throws Exception {
+        List<Employee> topLevelEmployees = employeeRepo.getTopLevelEmployees();
+        List<EmployeeDto> topLevelEmployeesDto = new ArrayList<>();
+        for (Employee topLevelEmployee : topLevelEmployees) {
+            topLevelEmployeesDto.add(getEmployeeById(topLevelEmployee.getEmployeeId()));
+        }
+        return topLevelEmployeesDto;
     }
 
 }

@@ -21,12 +21,12 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping()
-    public List<Employee> getEmployees() {
-        return employeeService.getEmployees();
+    @GetMapping("/top")
+    public List<EmployeeDto> getTopLevelEmployees() throws Exception {
+        return employeeService.getTopLevelEmployees();
     }
 
-    @GetMapping("{employeeId}")
+    @GetMapping("/{employeeId}")
     public EmployeeDto getEmployeeById(@PathVariable("employeeId") int employeeId) throws Exception {
         return employeeService.getEmployeeById(employeeId);
     }

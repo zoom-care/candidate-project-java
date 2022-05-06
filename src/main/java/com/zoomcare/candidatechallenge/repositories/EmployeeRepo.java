@@ -36,7 +36,11 @@ public class EmployeeRepo {
     public List<Property> getEmployeeProperties(int employeeId) {
         String sql = "SELECT p.key, p.value FROM property p WHERE p.employee_id = ?";
         return jdbcTemplate.query(sql, new PropertyRowMapper(), employeeId);
+    }
 
+    public List<Employee> getTopLevelEmployees() {
+        String sql = "SELECT * FROM employee e WHERE e.supervisor_id IS NULL";
+        return jdbcTemplate.query(sql, new EmployeeRowMapper());
     }
 
 }
