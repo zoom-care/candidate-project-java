@@ -3,6 +3,7 @@ package com.zoomcare.candidatechallenge.services;
 import com.zoomcare.candidatechallenge.dto.EmployeeDto;
 import com.zoomcare.candidatechallenge.entities.Employee;
 import com.zoomcare.candidatechallenge.entities.Property;
+import com.zoomcare.candidatechallenge.exceptions.EmployeeNotFoundException;
 import com.zoomcare.candidatechallenge.repositories.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class EmployeeService {
 
     public EmployeeDto getEmployeeById(int id) throws Exception {
         Optional<Employee> employeeOpt = employeeRepo.getEmployeeById(id);
-        if (!employeeOpt.isPresent()) throw new Exception("No existe un empleado con ese identificador"); // TODO: Custom exception
+        if (!employeeOpt.isPresent()) throw new EmployeeNotFoundException("No existe un empleado con ese identificador");
         List<Employee> employeeList = employeeRepo.getEmployees();
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setEmployeeId(id);
