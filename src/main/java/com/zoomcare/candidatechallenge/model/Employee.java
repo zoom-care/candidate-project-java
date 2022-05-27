@@ -1,10 +1,22 @@
 package com.zoomcare.candidatechallenge.model;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -14,31 +26,16 @@ public class Employee {
 	@Id
 	private long id;
 	
-	@Column(name = "SUPERVISOR_ID")
-	private long supervisorId;
+	@OneToMany
+	@JoinColumn(name = "SUPERVISOR_ID")
+	private Employee supervisor;
 	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public long getSupervisorId() {
-		return supervisorId;
-	}
-	public void setSupervisorId(long supervisorId) {
-		this.supervisorId = supervisorId;
-	}
-	public Employee(long id, long supervisorId) {
-		super();
-		this.id = id;
-		this.supervisorId = supervisorId;
-	}
-	public Employee() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	@OneToMany(mappedBy = "supervisor")
+	private List<Employee> employees = new ArrayList<>();
 	
 	
-
+	@OneToMany
+	@JoinColumn(name="EMPLOYEE_ID")
+	private List<Property> properties = new ArrayList<>();
+	
 }
