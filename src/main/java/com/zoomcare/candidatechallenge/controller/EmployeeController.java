@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zoomcare.candidatechallenge.repository.EmployeeRepository;
+import com.zoomcare.candidatechallenge.exception.ResourceNotFoundException;
 import com.zoomcare.candidatechallenge.model.Employee;
 
 @RestController
@@ -31,7 +32,7 @@ public class EmployeeController {
 	}
 	
 	//get employee by id
-	@GetMapping("employees/{id}")
+	@GetMapping("/employees/{id}")
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable(value="id") long employeeId) throws ResourceNotFoundException {
 		Employee employee = employeeRepository.findById(employeeId)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee note found for this id ::" + employeeId));
