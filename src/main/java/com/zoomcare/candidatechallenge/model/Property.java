@@ -29,5 +29,33 @@ public class Property {
 	
 	@Column(name="VALUE")
 	private String value;
+
+	public compositeKeyEmployeeProperty getId() {
+		return id;
+	}
+
+	public void setId(compositeKeyEmployeeProperty id) {
+		this.id = id;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public Property(compositeKeyEmployeeProperty id, String value) {
+		super();
+		this.id = id;
+		this.value = value;
+	}
+
+	public Property() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	
 }

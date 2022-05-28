@@ -37,5 +37,62 @@ public class Employee {
 	@OneToMany
 	@JoinColumn(name="EMPLOYEE_ID")
 	private List<Property> properties = new ArrayList<>();
+
+
+	public long getId() {
+		return id;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	public Employee getSupervisor() {
+		return supervisor;
+	}
+
+
+	public void setSupervisor(Employee supervisor) {
+		this.supervisor = supervisor;
+	}
+
+
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+
+
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
+	}
+
+
+	public List<Property> getProperties() {
+		return properties;
+	}
+
+
+	public void setProperties(List<Property> properties) {
+		this.properties = properties;
+	}
+
+
+	public Employee(long id, Employee supervisor, List<Employee> employees, List<Property> properties) {
+		super();
+		this.id = id;
+		this.supervisor = supervisor;
+		this.employees = employees;
+		this.properties = properties;
+	}
+
+
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 	
 }
