@@ -2,8 +2,12 @@ package com.zoomcare.candidatechallenge;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.zoomcare.candidatechallenge"})
+@EnableJpaRepositories(basePackages = {"com.zoomcare.candidatechallenge.repository"})
+@EntityScan(basePackages = {"com.zoomcare.candidatechallenge.model"})
 public class CandidateChallengeApplication
 {
 
