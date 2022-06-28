@@ -22,7 +22,7 @@ import com.zoomcare.candidatechallenge.service.EmployeeService;
 import com.zoomcare.candidatechallenge.service.implementation.EmployeeImplementation;
 import com.zoomcare.candidatechallenge.dto.EmployeeDto;
 import com.zoomcare.candidatechallenge.exception.ResourceNotFoundException;
-import com.zoomcare.candidatechallenge.model.Employee;
+import com.zoomcare.candidatechallenge.model.EmployeeEntity;
 
 @RestController
 @RequestMapping("/api/v1")

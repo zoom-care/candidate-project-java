@@ -15,7 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.zoomcare.candidatechallenge.dto.EmployeeDto;
 import com.zoomcare.candidatechallenge.lib.EmployeeMapStruct;
-import com.zoomcare.candidatechallenge.model.Employee;
+import com.zoomcare.candidatechallenge.model.EmployeeEntity;
 import com.zoomcare.candidatechallenge.repository.EmployeeRepository;
 import com.zoomcare.candidatechallenge.service.EmployeeService;
 
@@ -26,7 +26,7 @@ public class EmployeeImplementation implements EmployeeService{
 	private EmployeeRepository employeeRepository;
 	
 	public EmployeeDto getEmployeeById(Long employeeId) {
-	 Optional<Employee> employeeInfo = employeeRepository.findById(employeeId);
+	 Optional<EmployeeEntity> employeeInfo = employeeRepository.findById(employeeId);
 	 
 	 if (!employeeInfo.isPresent())
 		 throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Employee not found for this id ::" + employeeId);
@@ -35,7 +35,7 @@ public class EmployeeImplementation implements EmployeeService{
 	}
 	
 	public List<EmployeeDto> getListTopEmployees (){
-		Page<Employee> listEmployees = (Page<Employee>) employeeRepository.findAll();
+		Page<EmployeeEntity> listEmployees = (Page<EmployeeEntity>) employeeRepository.findAll();
 		 
 		return listEmployees
 				 .stream()

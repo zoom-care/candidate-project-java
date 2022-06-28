@@ -17,21 +17,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "EMPLOYEE")
-public class Employee {
+public class EmployeeEntity {
 	
 	@Id
 	private long id;
 	
-	@OneToMany
+	@OneToOne
 	@JoinColumn(name = "SUPERVISOR_ID")
-	private Employee supervisor;
+	private EmployeeEntity supervisor;
 	
 	@OneToMany(mappedBy = "supervisor")
-	private List<Employee> employees = new ArrayList<>();
+	private List<EmployeeEntity> employees = new ArrayList<>();
 	
 	
 	@OneToMany
@@ -49,22 +50,22 @@ public class Employee {
 	}
 
 
-	public Employee getSupervisor() {
+	public EmployeeEntity getSupervisor() {
 		return supervisor;
 	}
 
 
-	public void setSupervisor(Employee supervisor) {
+	public void setSupervisor(EmployeeEntity supervisor) {
 		this.supervisor = supervisor;
 	}
 
 
-	public List<Employee> getEmployees() {
+	public List<EmployeeEntity> getEmployees() {
 		return employees;
 	}
 
 
-	public void setEmployees(List<Employee> employees) {
+	public void setEmployees(List<EmployeeEntity> employees) {
 		this.employees = employees;
 	}
 
@@ -79,7 +80,7 @@ public class Employee {
 	}
 
 
-	public Employee(long id, Employee supervisor, List<Employee> employees, List<Property> properties) {
+	public EmployeeEntity(long id, EmployeeEntity supervisor, List<EmployeeEntity> employees, List<Property> properties) {
 		super();
 		this.id = id;
 		this.supervisor = supervisor;
@@ -88,7 +89,7 @@ public class Employee {
 	}
 
 
-	public Employee() {
+	public EmployeeEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
