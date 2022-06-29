@@ -2,6 +2,10 @@ spring:
   h2:
     console:
       enabled: true
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    show-sql=true:
 management:
   endpoints:
     web:
