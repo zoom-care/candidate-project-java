@@ -1,5 +1,7 @@
 package com.zoomcare.candidatechallenge.service;
 
+import java.util.List;
+
 import com.zoomcare.candidatechallenge.dto.EmployeeAllDto;
 
 /**
@@ -8,7 +10,7 @@ import com.zoomcare.candidatechallenge.dto.EmployeeAllDto;
  * 
  * @author Sergio de la Torre
  * @see EmployeeAllDto
- * @version 1.1
+ * @version 1.2
  * @since 2022-07-14
  */
 public interface EmployeeService {
@@ -18,5 +20,11 @@ public interface EmployeeService {
 	 *  	@param employeeId
 	 */
 	EmployeeAllDto getEmployeeById(Long employeeId);
+	
+	/**
+	 * Returns a list of employees that are supervisors 
+	 * of at least another employee
+	 */
+	List<EmployeeAllDto> getTopEmployees ();
 
 }
