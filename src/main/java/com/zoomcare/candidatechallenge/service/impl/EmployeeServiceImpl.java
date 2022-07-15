@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zoomcare.candidatechallenge.dto.EmployeeDto;
+import com.zoomcare.candidatechallenge.dto.EmployeeAllDto;
 import com.zoomcare.candidatechallenge.model.Employee;
 import com.zoomcare.candidatechallenge.repository.EmployeeRepository;
 import com.zoomcare.candidatechallenge.service.EmployeeService;
@@ -19,9 +19,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 	ModelMapper mapper;
 
 	@Override
-	public EmployeeDto getEmployeeById(Long employeeId) {
+	public EmployeeAllDto getEmployeeById(Long employeeId) {
 		Employee employee = employeeRepository.findById(employeeId).orElse(new Employee());
-		return mapper.map(employee, EmployeeDto.class);
+		return mapper.map(employee, EmployeeAllDto.class);
 	}
 
 }

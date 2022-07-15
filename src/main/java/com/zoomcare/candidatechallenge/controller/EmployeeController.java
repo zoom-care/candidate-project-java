@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zoomcare.candidatechallenge.dto.EmployeeDto;
+import com.zoomcare.candidatechallenge.dto.EmployeeAllDto;
 import com.zoomcare.candidatechallenge.service.EmployeeService;
 
 /**
@@ -20,9 +20,9 @@ import com.zoomcare.candidatechallenge.service.EmployeeService;
  * </ul>
  * 
  * @author Sergio de la Torre
- * @see EmployeeDto
+ * @see EmployeeAllDto
  * @see EmployeeService
- * @version 1.0
+ * @version 1.1
  * @since 2022-07-14
  */
 @RestController
@@ -40,8 +40,8 @@ public class EmployeeController {
 	 * 			{@link ResponseEntity<EmployeeAllDto>}
 	 */
 	@GetMapping("/{id}")
-	public ResponseEntity<EmployeeDto> getById(@PathVariable("id") Long employeeId){
-		EmployeeDto employeeDto = employeeService.getEmployeeById(employeeId);
+	public ResponseEntity<EmployeeAllDto> getById(@PathVariable("id") Long employeeId){
+		EmployeeAllDto employeeDto = employeeService.getEmployeeById(employeeId);
 		return new ResponseEntity<>(employeeDto, HttpStatus.OK);
 	}
 
