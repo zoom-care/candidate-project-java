@@ -20,7 +20,7 @@ import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/employee")
+@RequestMapping("/v1/employees")
 @Slf4j
 @RequiredArgsConstructor
 @Validated
@@ -41,7 +41,7 @@ public class EmployeeController {
     }
   }
 
-  @GetMapping(name = "find employee by ID", value = "/{employeeId}",
+  @GetMapping(name = "find employee by ID", value = "{employeeId}",
       produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(value = HttpStatus.OK)
   public Employee findEmployeeById(
