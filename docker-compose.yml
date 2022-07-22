@@ -1,0 +1,1 @@
+version: '2'services:  backend:    image: java-candidate-challenge:1.0.0    build:      context: .    ports:      - "8080:8080"
