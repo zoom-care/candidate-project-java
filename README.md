@@ -35,7 +35,7 @@ An primary id for an employee and a reference to the employees supervisor.
 | ID            | BIGINT(19)    |
 | SUPERVISOR_ID | BIGINT(19)    |
 
-**PROPERTIES**
+**PROPERTY**
 A map of key/value pairs of properties assigned to an employee.
 
 | Column        | Type          |

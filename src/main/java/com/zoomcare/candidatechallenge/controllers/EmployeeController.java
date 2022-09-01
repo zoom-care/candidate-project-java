@@ -1,6 +1,6 @@
 package com.zoomcare.candidatechallenge.controllers;
 
-import com.zoomcare.candidatechallenge.Entities.Employee;
+import com.zoomcare.candidatechallenge.Models.Employee;
 import com.zoomcare.candidatechallenge.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
