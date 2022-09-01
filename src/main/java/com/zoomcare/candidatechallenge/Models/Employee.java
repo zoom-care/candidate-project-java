@@ -2,6 +2,7 @@ package com.zoomcare.candidatechallenge.Models;
 
 import org.springframework.lang.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Employee {
@@ -12,6 +13,9 @@ public class Employee {
 
     @Nullable
     private List<EmployeeProperty> employeeProperties;
+
+    @Nullable
+    private List<Employee> reports = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -25,6 +29,11 @@ public class Employee {
     @Nullable
     public List<EmployeeProperty> getEmployeeProperties() {
         return employeeProperties;
+    }
+
+    @Nullable
+    public List<Employee> getReports() {
+        return reports;
     }
 
     public void setEmployeeProperties(@Nullable List<EmployeeProperty> employeeProperties) {

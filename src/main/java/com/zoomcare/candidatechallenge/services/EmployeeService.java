@@ -5,6 +5,8 @@ import com.zoomcare.candidatechallenge.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmployeeService {
     @Autowired
@@ -14,6 +16,9 @@ public class EmployeeService {
         return employeeRepository.getEmployeeById(id);
     }
 
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.getAllEmployees();
+    }
 }
 
 /*
@@ -24,7 +29,6 @@ tests
 /*
 need:
 get all top-level employees
-get an employee by id
 
 all employees returned include id, all properties, and a nested list of direct reports
  */
