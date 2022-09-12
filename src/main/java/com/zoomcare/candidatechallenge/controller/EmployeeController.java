@@ -16,6 +16,11 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @GetMapping("employee/supervisors")
+    public @ResponseBody List<Employee> findAllSupervisors() {
+        return employeeService.findAllSupervisors();
+    }
+
     @GetMapping("employee/{id}/employees")
     public @ResponseBody List<Employee> findBySupervisorId(@PathVariable("id") Integer supervisor_id) {
         return employeeService.findBySupervisorId(supervisor_id);

@@ -10,19 +10,38 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Autowired
+    private JdbcTemplate jdbcTemplate;
+    @Autowired
     private NamedParameterJdbcTemplate nPJdbcTemplate;
+
+    @Override
+    public List<Employee> findAllSupervisors() {
+        List<Employee> employees = jdbcTemplate.query("SELECT * FROM employee WHERE supervisor_id IS NULL OR supervisor_id = 1",
+
+                new RowMapper<Employee>(){
+
+                    @Override
+                    public Employee mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+                        Employee employee = new Employee();
+                        employee.setId(resultSet.getInt("id"));
+                        employee.setSupervisorId(resultSet.getInt("supervisor_id"));
+                        return employee;
+                    }
+                });
+
+        return employees;
+    }
 
     @Override
     public List<Employee> findBySupervisorId(Integer supervisorId) {
 
-        List<Employee> employees = nPJdbcTemplate.query("select * from employee where supervisor_id = :supervisorId",
+        List<Employee> employees = nPJdbcTemplate.query("SELECT * FROM employee WHERE supervisor_id = :supervisorId",
                 new MapSqlParameterSource().addValue("supervisorId", supervisorId),
 
                 new RowMapper<Employee>(){

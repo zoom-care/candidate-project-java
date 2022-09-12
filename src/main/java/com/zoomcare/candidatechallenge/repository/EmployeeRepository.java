@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface EmployeeRepository {
 
+    List<Employee> findAllSupervisors();
+
     List<Employee> findBySupervisorId(Integer supervisorId);
 }
