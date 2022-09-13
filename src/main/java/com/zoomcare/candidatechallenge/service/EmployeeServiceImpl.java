@@ -1,6 +1,6 @@
 package com.zoomcare.candidatechallenge.service;
 
-import com.zoomcare.candidatechallenge.model.Employee;
+import com.zoomcare.candidatechallenge.model.dto.EmployeeDTO;
 import com.zoomcare.candidatechallenge.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +14,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     EmployeeRepository employeeRepository;
 
     @Override
-    public List<Employee> findAllSupervisors() {
-        return employeeRepository.findAllSupervisors();
+    public List<EmployeeDTO> findAllTopLevelEmployees() {
+        return employeeRepository.findAllTopLevelEmployees();
     }
 
     @Override
-    public List<Employee> findBySupervisorId(Integer supervisor_id) {
-        return employeeRepository.findBySupervisorId(supervisor_id);
+    public List<EmployeeDTO> findEmployeeById(Integer id) {
+        return employeeRepository.findEmployeeById(id);
     }
 }

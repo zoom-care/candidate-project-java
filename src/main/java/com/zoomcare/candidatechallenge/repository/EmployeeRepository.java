@@ -1,12 +1,12 @@
 package com.zoomcare.candidatechallenge.repository;
 
-import com.zoomcare.candidatechallenge.model.Employee;
+import com.zoomcare.candidatechallenge.model.dto.EmployeeDTO;
 
 import java.util.List;
 
 public interface EmployeeRepository {
 
-    List<Employee> findAllSupervisors();
+    List<EmployeeDTO> findAllTopLevelEmployees();
 
-    List<Employee> findBySupervisorId(Integer supervisorId);
+    List<EmployeeDTO> findEmployeeById(Integer id);
 }
