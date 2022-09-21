@@ -30,13 +30,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Optional<Employee> getEmployeeById(Long employeeId) throws NotFoundException {
         LOGGER.debug("Retrieving employee by id : " + employeeId);
-
         try {
             Optional<Employee> employee = employeeRepository.findById(employeeId);
-            if (!employee.isPresent()) {
-                throw new NotFoundException("Employee not found for this id : " + employeeId);
-            }
-            return employee;
+
+            return Optional.ofNullable(employee
+                    .orElseThrow(() -> new NotFoundException("Employee not found for this id : " + employeeId)));
         } catch (Exception e) {
             throw e;
         }
