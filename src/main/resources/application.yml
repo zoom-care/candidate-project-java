@@ -10,3 +10,7 @@ management:
   endpoint:
     health:
       show-details: always
+springdoc:
+  packages-to-scan: com.zoomcare.candidatechallenge.controller
+  swagger-ui:
+    path: /api-docs
