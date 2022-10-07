@@ -2,6 +2,17 @@ spring:
   h2:
     console:
       enabled: true
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    jpa:
+      show-sql: true
+  flyway:
+    baseline-on-migrate: true
+  main:
+    allow-bean-definition-overriding: true
 management:
   endpoints:
     web:
@@ -10,3 +21,4 @@ management:
   endpoint:
     health:
       show-details: always
+
