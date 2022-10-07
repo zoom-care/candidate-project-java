@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -11,11 +12,8 @@ import java.util.Set;
 public class EmployeeEntity {
     @Id
     private Long id;
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name="supervisor_id")
-    private EmployeeEntity supervisor;
-
-    @OneToMany(mappedBy = "supervisor")
-    private Set<EmployeeEntity> subordinates;
+    private Long supervisor_id;
+    private List<PropertyEntity> employeeDetails;
+    private List<Long> reportees;
 
 }
