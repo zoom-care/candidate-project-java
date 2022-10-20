@@ -2,13 +2,7 @@ package com.zoomcare.candidatechallenge.model;
 
 import lombok.Data;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapKeyColumn;
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,13 +11,13 @@ import java.util.Map;
 public class Employee {
 
     @Id
-    private Long id;
+    public Long id;
 
-    private Long supervisorId;
+    public Long supervisorId;
 
     @ElementCollection
     @MapKeyColumn(name = "key")
     @Column(name = "value")
-    @CollectionTable(name="property", joinColumns = @JoinColumn(name = "employee_id"))
-    Map<String, String> properties = new HashMap<>();
+    @CollectionTable(name = "property", joinColumns = @JoinColumn(name = "employee_id"))
+    public Map<String, String> properties = new HashMap<>();
 }

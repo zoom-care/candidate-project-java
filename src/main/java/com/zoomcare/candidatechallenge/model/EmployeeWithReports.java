@@ -9,8 +9,10 @@ import java.util.Map;
 public class EmployeeWithReports {
 
     private Long id;
-    private Long supervisorId;
-    private Map<String, String> properties;
-    private List<EmployeeWithReports> reports;
 
+    private Long supervisorId;
+
+    private Map<String, String> properties;
+
+    private List<EmployeeWithReports> reports;
 }
