@@ -1,25 +1,24 @@
 package com.zoomcare.candidatechallenge.controller;
 
-import com.zoomcare.candidatechallenge.service.EmployeeService;
-import lombok.AllArgsConstructor;
+import com.zoomcare.candidatechallenge.model.EmployeeWithReports;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/employees")
-@AllArgsConstructor
-public class EmployeeController {
+import java.util.List;
 
-    private EmployeeService employeeService;
+public interface EmployeeController {
 
-    @GetMapping
-    public ResponseEntity getById(@RequestParam(required = false) Long id) {
-        return id == null ?
-                ResponseEntity.ok(employeeService.getAll()) :
-                ResponseEntity.ok(employeeService.getById(id));
-    }
+    /**
+     * Returns a list of all top-level employees.
+     *
+     * @return the list of employees
+     */
+    ResponseEntity<List<EmployeeWithReports>> getAll();
+
+    /**
+     * Returns the employee with the given ID or a 404 response if no such employee exists.
+     *
+     * @param id the employee ID
+     * @return the employee
+     */
+    ResponseEntity<EmployeeWithReports> getById(Long id);
 }
-

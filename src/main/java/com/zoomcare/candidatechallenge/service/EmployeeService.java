@@ -7,7 +7,18 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    EmployeeWithReports getById(@PathVariable Long id);
-
+    /**
+     * Returns all top-level employees.
+     *
+     * @return the list of employees
+     */
     List<EmployeeWithReports> getAll();
+
+    /**
+     * Returns the employee with the given ID, or null if no such employee exists.
+     *
+     * @param id the employee ID
+     * @return the employee
+     */
+    EmployeeWithReports getById(@PathVariable Long id);
 }

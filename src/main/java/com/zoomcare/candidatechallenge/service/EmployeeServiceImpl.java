@@ -16,16 +16,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeRepository employeeRepository;
 
-    public EmployeeWithReports getById(@PathVariable Long id) {
-        if (!employeeRepository.existsById(id)) {
-            return null;
-        }
-        return employeeRepository
-                .findById(id)
-                .map(this::getEmployeeWithReports)
-                .orElse(null);
-    }
-
     public List<EmployeeWithReports> getAll() {
         return employeeRepository
                 .findBySupervisorIdIsNull()
@@ -34,18 +24,14 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Recursively collects reports via findBySupervisorId.
-     *
-     * @param id the id of the superior employee.
-     * @return a list of reports.
-     */
-    private List<EmployeeWithReports> collectReportsFor(Long id) {
+    public EmployeeWithReports getById(@PathVariable Long id) {
+        if (!employeeRepository.existsById(id)) {
+            return null;
+        }
         return employeeRepository
-                .findBySupervisorId(id)
-                .stream()
+                .findById(id)
                 .map(this::getEmployeeWithReports)
-                .collect(Collectors.toList());
+                .orElse(null);
     }
 
     /**
@@ -61,5 +47,19 @@ public class EmployeeServiceImpl implements EmployeeService {
         result.setProperties(employee.getProperties());
         result.setReports(collectReportsFor(employee.getId()));
         return result;
+    }
+
+    /**
+     * Recursively collects reports via findBySupervisorId.
+     *
+     * @param id the id of the superior employee.
+     * @return a list of reports.
+     */
+    private List<EmployeeWithReports> collectReportsFor(Long id) {
+        return employeeRepository
+                .findBySupervisorId(id)
+                .stream()
+                .map(this::getEmployeeWithReports)
+                .collect(Collectors.toList());
     }
 }
