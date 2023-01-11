@@ -2,6 +2,10 @@ insert into employee values ();
 select @ceo := scope_identity();
 insert into property (employee_id, key, value) values (@ceo, 'title', 'CEO');
 
+insert into employee values ();
+select @cio := scope_identity();
+insert into property (employee_id, key, value) values (@cio, 'title', 'CIO');
+
 insert into employee (supervisor_id) values (@ceo);
 select @vpsales := scope_identity();
 insert into property (employee_id, key, value) values (@vpsales, 'title', 'Vice President of Sales');
@@ -37,3 +41,12 @@ insert into employee(supervisor_id) values (@vpm);
 select @eumarketing := scope_identity();
 insert into property (employee_id, key, value) values (@eumarketing, 'title', 'Regional Director of Marketing');
 insert into property (employee_id, key, value) values (@eumarketing, 'region', 'Europe');
+
+insert into employee(supervisor_id) values (@cio);
+select @latamketing := scope_identity();
+insert into property (employee_id, key, value) values (@latamketing, 'title', 'Regional Director of Marketing');
+insert into property (employee_id, key, value) values (@latamketing, 'region', 'Latin America');
+
+insert into employee values ();
+select @inversor := scope_identity();
+insert into property (employee_id, key, value) values (@inversor, 'title', 'Investment Director');
