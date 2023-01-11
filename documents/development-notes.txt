@@ -1,0 +1,12 @@
+Development notes:
+
+This challenge was solved by creating two GET API calls: 
+
+This will be returning all top employee
+   {host}/employee
+This will be returning a specific employee by providing the id into the url
+   {host}/employee/{id}
+Please see on /documents folder, I did include a PostMan Collection with API calls examples
+File: Zoom-care.postman_collection.json
+
+Notes: I did face some issues with browser cache data, in order to perform further test I did add some extra test data on /src/main/db/migration/ V2__initial_data_structures.sql
