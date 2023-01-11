@@ -11,5 +11,5 @@ public class CandidateChallengeApplication
 	{
 		SpringApplication.run(CandidateChallengeApplication.class, args);
 	}
-//testing
+
 }
