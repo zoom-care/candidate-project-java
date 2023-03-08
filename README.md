@@ -49,3 +49,6 @@ A map of key/value pairs of properties assigned to an employee.
 1. Create a Fork of the repository into your personal GitHub space.
 2. Implement the feature as described above.
 3. Create a Pull Request back to the original project.
+
+## Swagger docs
+The swagger documentation is in [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
