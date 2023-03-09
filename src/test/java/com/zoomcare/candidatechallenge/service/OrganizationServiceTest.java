@@ -2,6 +2,7 @@ package com.zoomcare.candidatechallenge.service;
 
 import com.zoomcare.candidatechallenge.dto.EmployeeDTO;
 import com.zoomcare.candidatechallenge.model.Employee;
+import com.zoomcare.candidatechallenge.model.EntityPropertyPk;
 import com.zoomcare.candidatechallenge.model.Property;
 import com.zoomcare.candidatechallenge.repository.EmployeeRepository;
 import org.junit.Before;
@@ -68,14 +69,18 @@ public class OrganizationServiceTest {
         employee.setId(employee_id);
         List<Property> properties = new ArrayList<>();
         Property property = new Property();
-        property.setEmployee_id(employee_id);
-        property.setKey("KEY");
+        EntityPropertyPk pk = new EntityPropertyPk();
+        pk.setKey("KEY");
+        pk.setEmployee(employee);
+        property.setId(pk);
         property.setValue("VALUE");
         properties.add(property);
 
         Property property2 = new Property();
-        property2.setEmployee_id(employee_id);
-        property2.setKey("KEY2");
+        EntityPropertyPk pk2 = new EntityPropertyPk();
+        pk2.setKey("KEY2");
+        pk2.setEmployee(employee);
+        property2.setId(pk2);
         property2.setValue("VALUE2");
         properties.add(property2);
 
