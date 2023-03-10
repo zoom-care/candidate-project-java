@@ -1,0 +1,13 @@
+{
+    "supervisorId": 1,
+    "properties": [
+        {
+            "key": "key",
+            "value": "value"
+        },
+        {
+            "key": "key1",
+            "value": "value1"
+        }
+    ]
+}
