@@ -33,37 +33,59 @@ import java.util.Optional;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 
+import com.example.zoomcarecodechallenge.dto.EmployeeDTO;
+import com.example.zoomcarecodechallenge.service.EmployeeService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 public class EmployeeControllerTest {
 
     @Mock
-    private EmployeeRepository employeeRepository;
+    private EmployeeService employeeService;
     @InjectMocks
     private EmployeeController employeeController;
 
-    @BeforeEach
-    public void setup() {
-        employeeRepository = mock(EmployeeRepository.class);
-        employeeController = new EmployeeController(employeeRepository);
-    }
+    @Test
+    public void testGetTopLevelEmployees() {
+        EmployeeDTO employeeDTO1 = new EmployeeDTO();
+        employeeDTO1.setId(1L);
 
+        EmployeeDTO employeeDTO2 = new EmployeeDTO();
+        employeeDTO2.setId(2L);
+
+        List<EmployeeDTO> expectedEmployees = Arrays.asList(employeeDTO1, employeeDTO2);
+
+        when(employeeService.getTopLevelEmployees())
+                .thenReturn(expectedEmployees);
+
+        ResponseEntity<List<EmployeeDTO>> responseEntity = employeeController.getTopLevelEmployees();
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(expectedEmployees, responseEntity.getBody());
+    }
 
     @Test
-    public void testGetEmployeeFound() {
-        // Arrange
-        EmployeeDTO employeeD = new EmployeeDTO(1L);
-        employeeD.setProperties(List.of(new PropertiesDTO("key1", "value1")));
-        Employee employee = new Employee(1L);
-        employee.getProperties().add(new Properties("key1", "value1"));
+    public void testGetEmployee() {
+        EmployeeDTO expectedEmployee = new EmployeeDTO();
+        expectedEmployee.setId(1L);
 
-        when(employeeRepository.findById(1L)).thenReturn(Optional.of(employee));
+        when(employeeService.getEmployee(1L))
+                .thenReturn(expectedEmployee);
 
-        // Act
-        EmployeeDTO result = employeeController.getEmployee(1L);
+        ResponseEntity<EmployeeDTO> responseEntity = employeeController.getEmployee(1L);
 
-        // Assert
-         assertThat(result.getProperties()).hasSize(1);
-        assertThat(result.getReports()).isEmpty();
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(expectedEmployee, responseEntity.getBody());
     }
-
 }
