@@ -2,6 +2,15 @@ spring:
   h2:
     console:
       enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    driverClassName: org.h2.Driver
+  jpa:
+    show-sql: true   
+    properties:
+      hibernate:
+        format_sql: true
 management:
   endpoints:
     web:

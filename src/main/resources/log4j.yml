@@ -1,0 +1,23 @@
+Configutation:
+  name: Default
+  Properties:
+    Property:
+      name: log_pattern
+      value: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex"
+  Appenders:
+    Console:
+      name: Console_Appender
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: ${log_pattern}
+  Loggers:
+    Logger:
+      - name: com.zoomcare.candidatechallenge
+        level: debug
+        additivity: false
+        AppenderRef:
+          - ref: Console_Appender
+    Root:
+      level: info
+      AppenderRef:
+        - ref: Console_Appender
