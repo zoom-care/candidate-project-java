@@ -174,6 +174,8 @@ public class EmployeeService {
 			
 			if (null != organizationMap.get(next.getId())) {
 				topLevelListDTO.getUnderling().addAll(mapNextLevels(next.getId(), organizationMap));
+			} else {
+				topLevelListDTO.setUnderling(null);
 			} 
 			topLevelList.add(topLevelListDTO);
 		});
