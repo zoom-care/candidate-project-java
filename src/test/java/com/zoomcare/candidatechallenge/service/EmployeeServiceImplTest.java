@@ -34,7 +34,8 @@ public class EmployeeServiceImplTest {
         List<Property> propertyList = new ArrayList<>();
         Mockito.when(employeeRepository.findById(Mockito.any())).thenReturn(employeeOptional);
         Mockito.when(propertyRepository.findAllPropertyByEmployeeId(Mockito.any())).thenReturn(propertyList);
-        EmployeeResponse employee = service.getEmployee(5L);
+        Optional<EmployeeResponse> employee = service.getEmployee(5L);
+        System.out.println(employee);
         assertNotNull(employee);
     }
 

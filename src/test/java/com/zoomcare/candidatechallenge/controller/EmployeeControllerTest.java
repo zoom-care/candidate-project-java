@@ -2,22 +2,25 @@ package com.zoomcare.candidatechallenge.controller;
 
 import com.zoomcare.candidatechallenge.model.EmployeeResponse;
 import com.zoomcare.candidatechallenge.model.Property;
-import com.zoomcare.candidatechallenge.service.EmployeeService;
 import com.zoomcare.candidatechallenge.service.EmployeeServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class EmployeeControllerTest {
 
     private EmployeeController controller;
-    EmployeeService service;
+    EmployeeServiceImpl service;
 
     @Before
     public void setUp() {
@@ -28,10 +31,11 @@ public class EmployeeControllerTest {
     @Test
     public void test_getEmployee_success() {
         EmployeeResponse employeeResponse = getEmployeeResponse(1L, null,"title", "CEO");
-        Mockito.when(service.getEmployee(Mockito.any())).thenReturn(employeeResponse);
-        EmployeeResponse controllerResponse = controller.getEmployee(1L);
+        Mockito.when(service.getEmployee(Mockito.any())).thenReturn(Optional.ofNullable(employeeResponse));
+        ResponseEntity<EmployeeResponse> controllerResponse = controller.getEmployee(1L);
         assertNotNull(employeeResponse);
-        assertEquals(employeeResponse, controllerResponse);
+        assertEquals(employeeResponse, controllerResponse.getBody());
+        assertEquals(HttpStatus.OK, controllerResponse.getStatusCode());
     }
 
     @Test
@@ -45,11 +49,10 @@ public class EmployeeControllerTest {
 
     @Test
     public void test_getEmployee_notFound() {
-        EmployeeResponse employeeResponse = getEmployeeResponse(0L, null, null, null);
-        Mockito.when(service.getEmployee(Mockito.any())).thenReturn(employeeResponse);
-        EmployeeResponse controllerResponse = controller.getEmployee(0L);
-        assertNotNull(employeeResponse);
-        assertEquals(employeeResponse, controllerResponse);
+        Mockito.when(service.getEmployee(Mockito.any())).thenReturn(Optional.empty());
+        ResponseEntity<EmployeeResponse> controllerResponse = controller.getEmployee(0L);
+        assertNull(controllerResponse.getBody());
+        assertEquals(HttpStatus.NOT_FOUND, controllerResponse.getStatusCode());
     }
 
     private static EmployeeResponse getEmployeeResponse(Long id, Long supervisorId, String key, String title) {
