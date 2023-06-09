@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.Assert.assertNotNull;
+
 public class EmployeeServiceImplTest {
 
     private EmployeeServiceImpl service;
@@ -33,6 +35,16 @@ public class EmployeeServiceImplTest {
         Mockito.when(employeeRepository.findById(Mockito.any())).thenReturn(employeeOptional);
         Mockito.when(propertyRepository.findAllPropertyByEmployeeId(Mockito.any())).thenReturn(propertyList);
         EmployeeResponse employee = service.getEmployee(5L);
-        System.out.println(employee);
+        assertNotNull(employee);
+    }
+
+    @Test
+    public void test_getEmployees_success() {
+        Optional<Employee> employeeOptional = Optional.of(new Employee());
+        List<Property> propertyList = new ArrayList<>();
+        Mockito.when(employeeRepository.findById(Mockito.any())).thenReturn(employeeOptional);
+        Mockito.when(propertyRepository.findAllPropertyByEmployeeId(Mockito.any())).thenReturn(propertyList);
+        List<EmployeeResponse> employeeResponseList = service.getEmployees();
+        assertNotNull(employeeResponseList);
     }
 }

@@ -30,9 +30,17 @@ public class EmployeeControllerTest {
         EmployeeResponse employeeResponse = getEmployeeResponse(1L, null,"title", "CEO");
         Mockito.when(service.getEmployee(Mockito.any())).thenReturn(employeeResponse);
         EmployeeResponse controllerResponse = controller.getEmployee(1L);
-        System.out.println(controllerResponse);
         assertNotNull(employeeResponse);
         assertEquals(employeeResponse, controllerResponse);
+    }
+
+    @Test
+    public void test_getEmployees_success() {
+        List<EmployeeResponse> employeesResponse = new ArrayList<>();
+        Mockito.when(service.getEmployees()).thenReturn(employeesResponse);
+        List<EmployeeResponse> controllerResponse = controller.getEmployees();
+        assertNotNull(employeesResponse);
+        assertEquals(employeesResponse, controllerResponse);
     }
 
     @Test
@@ -40,7 +48,6 @@ public class EmployeeControllerTest {
         EmployeeResponse employeeResponse = getEmployeeResponse(0L, null, null, null);
         Mockito.when(service.getEmployee(Mockito.any())).thenReturn(employeeResponse);
         EmployeeResponse controllerResponse = controller.getEmployee(0L);
-        System.out.println(controllerResponse);
         assertNotNull(employeeResponse);
         assertEquals(employeeResponse, controllerResponse);
     }
@@ -59,4 +66,5 @@ public class EmployeeControllerTest {
                 .build();
         return employeeResponse;
     }
+
 }
