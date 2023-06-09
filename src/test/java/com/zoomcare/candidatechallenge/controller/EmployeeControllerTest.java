@@ -1,6 +1,6 @@
 package com.zoomcare.candidatechallenge.controller;
 
-import com.zoomcare.candidatechallenge.model.EmployeeResponse;
+import com.zoomcare.candidatechallenge.model.Employee;
 import com.zoomcare.candidatechallenge.model.Property;
 import com.zoomcare.candidatechallenge.service.EmployeeService;
 import com.zoomcare.candidatechallenge.service.EmployeeServiceImpl;
@@ -27,44 +27,42 @@ public class EmployeeControllerTest {
 
     @Test
     public void test_getEmployee_success() {
-        EmployeeResponse employeeResponse = getEmployeeResponse(1L, null,"title", "CEO");
-        Mockito.when(service.getEmployee(Mockito.any())).thenReturn(employeeResponse);
-        EmployeeResponse controllerResponse = controller.getEmployee(1L);
-        assertNotNull(employeeResponse);
-        assertEquals(employeeResponse, controllerResponse);
+        Employee employee = getEmployee(1L, null,"title", "CEO");
+        Mockito.when(service.getEmployee(Mockito.any())).thenReturn(employee);
+        Employee controllerResponse = controller.getEmployee(1L);
+        assertNotNull(employee);
+        assertEquals(employee, controllerResponse);
     }
 
     @Test
     public void test_getEmployees_success() {
-        List<EmployeeResponse> employeesResponse = new ArrayList<>();
+        List<Employee> employeesResponse = new ArrayList<>();
         Mockito.when(service.getEmployees()).thenReturn(employeesResponse);
-        List<EmployeeResponse> controllerResponse = controller.getEmployees();
+        List<Employee> controllerResponse = controller.getEmployees();
         assertNotNull(employeesResponse);
         assertEquals(employeesResponse, controllerResponse);
     }
 
     @Test
     public void test_getEmployee_notFound() {
-        EmployeeResponse employeeResponse = getEmployeeResponse(0L, null, null, null);
-        Mockito.when(service.getEmployee(Mockito.any())).thenReturn(employeeResponse);
-        EmployeeResponse controllerResponse = controller.getEmployee(0L);
-        assertNotNull(employeeResponse);
-        assertEquals(employeeResponse, controllerResponse);
+        Employee Employee = getEmployee(0L, null, null, null);
+        Mockito.when(service.getEmployee(Mockito.any())).thenReturn(Employee);
+        Employee controllerResponse = controller.getEmployee(0L);
+        assertNotNull(Employee);
+        assertEquals(Employee, controllerResponse);
     }
 
-    private static EmployeeResponse getEmployeeResponse(Long id, Long supervisorId, String key, String title) {
+    private static Employee getEmployee(Long id, Long supervisorId, String key, String title) {
+        Employee employee = new Employee();
+        employee.setId(id);
+        employee.setSupervisorId(supervisorId);
         Property property = new Property();
-        property.setEmployeeId(id);
+        property.setEmployee(employee);
         property.setKey(key);
         property.setValue(title);
         List<Property> propertyByEmployeeId = new ArrayList<>();
         propertyByEmployeeId.add(property);
-        EmployeeResponse employeeResponse = EmployeeResponse.builder()
-                .id(id)
-                .supervisorId(supervisorId)
-                .propertyList(propertyByEmployeeId)
-                .build();
-        return employeeResponse;
+        return employee;
     }
 
 }

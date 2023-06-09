@@ -1,15 +1,12 @@
 package com.zoomcare.candidatechallenge.service;
 
 import com.zoomcare.candidatechallenge.model.Employee;
-import com.zoomcare.candidatechallenge.model.EmployeeResponse;
-import com.zoomcare.candidatechallenge.model.Property;
 import com.zoomcare.candidatechallenge.repository.EmployeeRepository;
 import com.zoomcare.candidatechallenge.repository.PropertyRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,20 +28,16 @@ public class EmployeeServiceImplTest {
     @Test
     public void test_getEmployee_success() {
         Optional<Employee> employeeOptional = Optional.of(new Employee());
-        List<Property> propertyList = new ArrayList<>();
         Mockito.when(employeeRepository.findById(Mockito.any())).thenReturn(employeeOptional);
-        Mockito.when(propertyRepository.findAllPropertyByEmployeeId(Mockito.any())).thenReturn(propertyList);
-        EmployeeResponse employee = service.getEmployee(5L);
+        Employee employee = service.getEmployee(5L);
         assertNotNull(employee);
     }
 
     @Test
     public void test_getEmployees_success() {
         Optional<Employee> employeeOptional = Optional.of(new Employee());
-        List<Property> propertyList = new ArrayList<>();
         Mockito.when(employeeRepository.findById(Mockito.any())).thenReturn(employeeOptional);
-        Mockito.when(propertyRepository.findAllPropertyByEmployeeId(Mockito.any())).thenReturn(propertyList);
-        List<EmployeeResponse> employeeResponseList = service.getEmployees();
+        List<Employee> employeeResponseList = service.getEmployees();
         assertNotNull(employeeResponseList);
     }
 }

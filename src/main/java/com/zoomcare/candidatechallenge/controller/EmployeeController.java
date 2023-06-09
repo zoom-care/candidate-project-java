@@ -1,6 +1,6 @@
 package com.zoomcare.candidatechallenge.controller;
 
-import com.zoomcare.candidatechallenge.model.EmployeeResponse;
+import com.zoomcare.candidatechallenge.model.Employee;
 import com.zoomcare.candidatechallenge.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +18,12 @@ public class EmployeeController {
     private EmployeeService service;
 
     @GetMapping("/{id}")
-    public EmployeeResponse getEmployee(@PathVariable @NotNull Long id) {
+    public Employee getEmployee(@PathVariable @NotNull Long id) {
         return service.getEmployee(id);
     }
 
     @GetMapping
-    public List<EmployeeResponse> getEmployees() {
+    public List<Employee> getEmployees() {
         return service.getEmployees();
     }
 }

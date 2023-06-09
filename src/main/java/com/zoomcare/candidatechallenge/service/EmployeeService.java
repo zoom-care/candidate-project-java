@@ -1,10 +1,10 @@
 package com.zoomcare.candidatechallenge.service;
 
-import com.zoomcare.candidatechallenge.model.EmployeeResponse;
+import com.zoomcare.candidatechallenge.model.Employee;
 
 import java.util.List;
 
 public interface EmployeeService {
-    EmployeeResponse getEmployee(Long id);
-    List<EmployeeResponse> getEmployees();
+    Employee getEmployee(Long id);
+    List<Employee> getEmployees();
 }
