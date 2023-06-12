@@ -10,6 +10,6 @@ import java.util.List;
 public class EmployeeResponse {
     private Long id;
     private Long supervisorId;
-    private Iterable<Property> propertyList;
+    private List<Property> propertyList;
     private List<Employee> reporterList;
 }
