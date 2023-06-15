@@ -2,6 +2,16 @@ spring:
   h2:
     console:
       enabled: true
+    datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    
+  main:
+    allow-bean-definition-overriding: true
 management:
   endpoints:
     web:
@@ -10,3 +20,4 @@ management:
   endpoint:
     health:
       show-details: always
+      
