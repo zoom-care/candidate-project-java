@@ -9,8 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import lombok.Builder;
 
-@Entity()
+@Builder
+@Entity
 public class Employee implements Serializable {
     @Id
     @GeneratedValue
@@ -45,10 +47,6 @@ public class Employee implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public List<Property> getProperties() {

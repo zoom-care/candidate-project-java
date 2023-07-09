@@ -3,8 +3,10 @@ package com.zoomcare.candidatechallenge.model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import lombok.Builder;
 
 @Embeddable
+@Builder
 public class PropertyPK implements Serializable {
 
     private String key;

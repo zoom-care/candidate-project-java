@@ -3,8 +3,10 @@ package com.zoomcare.candidatechallenge.model;
 import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import lombok.Builder;
 
 @Entity
+@Builder
 public class Property implements Serializable {
     @EmbeddedId
     private PropertyPK id;
